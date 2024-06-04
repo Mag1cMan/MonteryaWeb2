@@ -10,7 +10,7 @@ const unityContextLocation = "Unity-WebGl-Build/Build";
 
 export default function GameEngine(){
   const {user ,SetGameState} = UserAuth();
-
+  console.log("Trigger Unity");
 
   if(user == null){
     return null;

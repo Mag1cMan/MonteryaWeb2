@@ -31,7 +31,7 @@ import { AccentPicker } from 'components/theme/Accent';
 import { useLinkColor } from 'components/theme';
 import { MotionBox } from 'components/shared/animations/motion';
 import { UserAuth } from '../../configs/AuthContext';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 const webLinks = [
@@ -48,24 +48,21 @@ const signup = [
   { name: 'SignUp', path: '/signup' },
   { name: 'Login', path: '/login' }
 ];
-const signedIn = [
-  { name: 'Profile', path: '/#' },
-  { name: 'Logout', path: '/#' }
-];
+
 const mobileLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Open Source', path: '/open-source' },
   { name: 'Blog', path: '/blog' },
   { name: 'Changelog', path: '/changelog' }
 ];
-const dropdownLinks = [
-  { name: 'Projects', path: '/projects' },
-  { name: 'Tech Stack', path: '/tech-stack' },
-  { name: 'Open Source', path: '/open-source' },
-  { name: 'Achievements', path: '/achievements' },
-  { name: 'Changelog', path: '/changelog' }
-  // { name: "Developer Story", path: "/developer-story" }
-];
+// const dropdownLinks = [
+//   { name: 'Projects', path: '/projects' },
+//   { name: 'Tech Stack', path: '/tech-stack' },
+//   { name: 'Open Source', path: '/open-source' },
+//   { name: 'Achievements', path: '/achievements' },
+//   { name: 'Changelog', path: '/changelog' }
+//   // { name: "Developer Story", path: "/developer-story" }
+// ];
 const profiledropdownLinks = [
   { name: 'UserProfile', path: '/#' },
   { name: 'Transaction', path: '/#' },

@@ -8,7 +8,7 @@ import {
   Link,
   Tooltip,
   useColorModeValue,
-  Flex,
+  // Flex,
   SimpleGrid,
   Box,
 } from '@chakra-ui/react'
@@ -18,15 +18,15 @@ import { useLinkColor } from 'components/theme'
 import Header from '../shared/header'
 import { CardTransition } from 'components/shared/animations/page-transitions'
 import { MotionBox } from 'components/shared/animations/motion'
-import { getDbPosts } from 'lib/fetchPosts'
-import { CommentIcon, HeartIcon } from 'components/shared/icons'
-import DisplayText from 'components/shared/icons/DisplayText'
+// import { getDbPosts } from 'lib/fetchPosts'
+// import { CommentIcon, HeartIcon } from 'components/shared/icons'
+// import DisplayText from 'components/shared/icons/DisplayText'
 
 const ORANGE = '#ff9400'
 
 const PopularArticles: React.FC<BlogPostProps> = (props) => {
   const { posts } = props
-  const { dbPosts, isLoading } = getDbPosts()
+  // const { dbPosts, isLoading } = getDbPosts()
   const linkColor = useLinkColor()
   const textColor = useColorModeValue('gray.500', 'gray.200')
 
@@ -46,10 +46,6 @@ const PopularArticles: React.FC<BlogPostProps> = (props) => {
     return comparison
   }
 
-  const getPostLikes = (slug) => {
-    const p = dbPosts?.filter((p) => p.slug === slug)[0]
-    return p?.likes || 0
-  }
 
   return (
     <VStack align="start" spacing={8} width="100%">

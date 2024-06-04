@@ -1,32 +1,21 @@
 import {
-  Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
-  Heading,
   Text,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import OAuthForm from './OAuthForm';
 
-const signup = [
-  { name: 'SignUp', path: '/signup' },
-  { name: "Login", path: '/login' },
-]
-
 export default function SignupCard() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   return (

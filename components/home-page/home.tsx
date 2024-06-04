@@ -3,30 +3,25 @@ import {
   Flex,
   Avatar,
   Box,
-  Text,
-  Badge,
-  Stack,
-  Link,
-  UnorderedList,
-  ListItem,
-  useColorModeValue
 } from '@chakra-ui/react';
 import { MotionBox, MotionFlex } from 'components/shared/animations/motion';
 import Header from 'components/shared/header';
-import NextLink from 'next/link';
-import { useLinkColor } from 'components/theme';
-import PopularArticles from './PopularArticles';
+// import { useLinkColor } from 'components/theme';
+// import PopularArticles from './PopularArticles';
 import { BlogPostProps } from 'interfaces/interface';
-import { newContent } from 'data/data';
 import ChangeLog from 'pages/changelog';
+
 
 const ANIMATION_DURATION = 0.5;
 const ORANGE = '#ff9400';
 const emojis = ['👋', '👍', '🖐'];
 
-const Home: React.FC<BlogPostProps> = (props) => {
-  const { posts } = props;
-  const linkColor = useLinkColor();
+// const Home: React.FC<BlogPostProps> = (props) => {
+
+
+const Home: React.FC<BlogPostProps> = () => {
+  // const { posts } = props;
+  // const linkColor = useLinkColor();
   const [showEmogi, setShowEmoji] = useState(false);
   const [emojiCounter, setEmojiCounter] = useState(-1);
 
@@ -146,19 +141,19 @@ const Home: React.FC<BlogPostProps> = (props) => {
         zIndex={1}
       >
         <Box mt={10}>
-          <ContentBox linkColor={linkColor} />
-          {/* <PopularArticles posts={posts} /> */}
-          <ChangeLog />
+          {/* <ContentBox linkColor={linkColor} /> */}
+          {/* <PopularArticles posts={posts} hidden/> */}
+          <ChangeLog/>
         </Box>
       </MotionBox>
     </Flex>
   );
 };
 
-const ContentBox = ({ linkColor }) => {
-  return (
-    <></>
-  );
-};
+// const ContentBox = ({ linkColor }) => {
+//   return (
+//     <></>
+//   );
+// };
 
 export default Home;

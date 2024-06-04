@@ -1,15 +1,14 @@
 "use client";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
+// import React, { Fragment, useCallback, useEffect } from "react";
+
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { UserAuth } from "../../configs/AuthContext";
 const unityContextLocation = "Unity-WebGl-Build/Build";
-type ReactUnityEventParameter = string | number | undefined;
+// type ReactUnityEventParameter = string | number | undefined;
 
 
 export default function GameEngine(){
-
-  
-  const [userName] = useState();
   const {user ,SetGameState} = UserAuth();
 
 
@@ -33,23 +32,25 @@ export default function GameEngine(){
 // 1EYikr0VG8SgxOLrpsk2rmzUmo83
 // tO0iKyLOUkNHMUxHOfiyqozk9EC3
 
-    function handleClickSpawnEnemies() {
-      sendMessage("GameController", "SpawnEnemies", 100);
-    }
+    // function handleClickSpawnEnemies() {
+    //   sendMessage("GameController", "SpawnEnemies", 100);
+    // }
 
 
-    const UNITY_handleSetScore = useCallback((score) => {
-      console.log("Trigger Game Over")
-     
-      console.log(user)
-      console.log(user.uid)
-    }, []);
+    // const UNITY_handleSetScore = useCallback((score) => {
+    //   console.log("Trigger Game Over")
+    // }, []);
+
+    // const UNITY_handleSetScore = useCallback((score) => {
+    //   console.log("Trigger Game Over")
+    // }, []);
 
 
-     function setCurrentUserSession(){
-        sendMessage("Client - Communicator", "SetUserId", user.uid);
-        // You might need to handle some logic to set isLoaded to true
-    }
+
+    //  function setCurrentUserSession(){
+    //     sendMessage("Client - Communicator", "SetUserId", user.uid);
+    //     // You might need to handle some logic to set isLoaded to true
+    // }
 
     if (isLoaded === true) {
       //const jwt = localStorage.getItem('jwt');
@@ -60,13 +61,18 @@ export default function GameEngine(){
     // Functions to allow Unity Game to send info to React
     useEffect(() => {
 
-      addEventListener("SetScore", UNITY_handleSetScore);
-      return () => {
-        removeEventListener("SetScore", UNITY_handleSetScore);
-      };
+      // addEventListener("SetScore", UNITY_handleSetScore);
+      // return () => {
+      //   removeEventListener("SetScore", UNITY_handleSetScore);
+      // };
         
     
-    }, [addEventListener, removeEventListener, UNITY_handleSetScore , user]);
+    }, [addEventListener, removeEventListener , user]);
+
+
+
+  // }, [addEventListener, removeEventListener, UNITY_handleSetScore , user]);
+
 
   return (
     
@@ -86,4 +92,4 @@ export default function GameEngine(){
           </Fragment>
  
   );
-};
+}

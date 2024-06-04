@@ -8,7 +8,6 @@ import {
   Link,
   HStack,
   ListItem,
-  UnorderedList,
   useColorModeValue,
   ListIcon,
   Divider,
@@ -21,7 +20,6 @@ import moment from 'moment';
 import { Tag } from 'components/shared/Tags';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { GoIssueReopened } from 'react-icons/go';
-import ReactHtmlParser from 'react-html-parser';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLinkColor } from 'components/theme';
 

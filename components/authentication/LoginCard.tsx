@@ -1,26 +1,17 @@
 import {
-  Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  HStack,
-  InputRightElement,
   Stack,
   Button,
-  Heading,
   Text,
   useColorModeValue
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import OAuthForm from './OAuthForm';
 
 export default function LoginCard() {
-  const [showPassword, setShowPassword] = useState(false);
-
   return (
     <>
       <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>

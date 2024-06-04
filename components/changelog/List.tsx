@@ -29,6 +29,13 @@ const PrList = ({ prList }) => {
   const linkColor = useLinkColor();
   const textColor = useColorModeValue('gray.500', 'gray.200');
 
+
+  const convertTime =(seconds , nanosec)=>{
+    const timestamp = { seconds, nanosec };
+    const formattedDate = moment.unix(timestamp.seconds).format('DD MMM YYYY'); // 'DD MMM YYYY' will give you the date in the format like '03 May 2024'
+    return formattedDate;
+  } 
+
   return (
     <AnimatePresence>
       <List>
@@ -50,19 +57,19 @@ const PrList = ({ prList }) => {
               })
             }}
             custom={index}
-            key={pr.html_url}
+            key={pr.title}
           >
             <VStack spacing={4} align="left" mx={[0, 0, 6]} mt={8}>
               <ListItem>
                 <MotionBox whileHover={{ x: 10 }} key={index} align="left">
                   <CardTransition>
                     <Heading fontSize="lg" textAlign="left" mt={0} mb={1}>
-                      {pr.state === 'closed' && pr.merged_at ? (
+                      {!pr.isDone ? (
                         <ListIcon as={AiFillCheckCircle} color="green.500" />
                       ) : (
                         <ListIcon as={GoIssueReopened} color="gray.500" />
                       )}
-                      <NextLink href={pr.html_url} passHref>
+                      <NextLink href={pr.title} passHref>
                         <Text as={Link} color={linkColor} target="_blank">
                           {pr.title}
                         </Text>
@@ -70,14 +77,14 @@ const PrList = ({ prList }) => {
                     </Heading>
                     <HStack spacing={2} isInline ml={[0, 0, 6]}>
                       <Text fontSize="sm" fontWeight="600" color={textColor}>
-                        {moment(pr.created_at).format('Do MMMM YYYY')}
+                        {convertTime(pr.created_at.seconds , pr.created_at.nanoseconds)}
                       </Text>
                       <HStack spacing={1} alignItems="center" display={['none', 'none', 'flex']}>
                         <Flex alignItems="center" flexWrap="wrap" m="-2px">
                           {pr.labels.map((label) => (
                             <Tag
-                              key={label.name}
-                              name={label.name}
+                              key={label}
+                              name={label}
                               m="2px"
                               padding="0 3px"
                               size="sm"
@@ -86,13 +93,13 @@ const PrList = ({ prList }) => {
                         </Flex>
                       </HStack>
                     </HStack>
-                    <Box ml={6} mt={2} className="article">
-                      {pr.body && <UnorderedList>{ReactHtmlParser(pr.body_html)}</UnorderedList>}
+                    <Box fontSize="sm" ml={6} mt={2} className="article">
+                      {pr.description}
                     </Box>
                   </CardTransition>
                 </MotionBox>
               </ListItem>
-              {prList.length - 1 !== index && <Divider />}
+              {pr.labels.length - 1 !== index && <Divider />}
             </VStack>
           </motion.div>
         ))}

@@ -1,0 +1,41 @@
+<linker>
+  <assembly fullname="FishNet.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="FishNet.Managing.Logging.LevelLoggingConfiguration" preserve="all" />
+  </assembly>
+  <assembly fullname="monterya.editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="IconData" preserve="all" />
+    <type fullname="SpriteDictionary" preserve="all" />
+  </assembly>
+  <assembly fullname="monterya.info, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="monterya.info.ItemDataContainer" preserve="all" />
+    <type fullname="monterya.info.FishingTool" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.Food" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.GatheringTool" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.ItemContent" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.ItemData" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.Outfit" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.PetData" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.RecipeData" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.Resource" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.SceneProvider" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.GameObject" preserve="all" />
+    <type fullname="UnityEngine.Object" preserve="all" />
+    <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
+    <type fullname="UnityEngine.Transform" preserve="all" />
+  </assembly>
+  <assembly fullname="Sirenix.Serialization">
+    <type fullname="Sirenix.Serialization.SerializationData" preserve="nothing" serialized="true" />
+  </assembly>
+</linker>

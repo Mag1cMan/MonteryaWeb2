@@ -4,11 +4,19 @@ import { CSSTransition } from 'react-transition-group';
 import { FaGoogle } from "react-icons/fa";
 import { useToast } from '@chakra-ui/react'
 import { UserAuth } from "../../configs/AuthContext";
+import { useRouter } from 'next/router';
 
 export default function OAuthForm() {
     const [isPending, setIsPending] = useState(false);
     const toast = useToast()
     const { googleSignIn, logOut, authReady } = UserAuth();
+    const router = useRouter();
+
+    const goToSignUp = () => {
+      router.push('/#');
+    };
+  
+
 
     const handleLoginWithGoogle = () => {
       setIsPending(true);
@@ -17,7 +25,8 @@ export default function OAuthForm() {
           // After the operation is done, set isPending to false
           setIsPending(false);
           await googleSignIn();
-          // Call googleSignIn or any other function
+          // Call googleSignIn or any other function\
+          goToSignUp();
   
           toast({
               title: `Google Login Successful`,

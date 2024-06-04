@@ -30,31 +30,34 @@ import { useRouter } from 'next/router';
 import { AccentPicker } from 'components/theme/Accent';
 import { useLinkColor } from 'components/theme';
 import { MotionBox } from 'components/shared/animations/motion';
-import Image from 'next/image';
 import { UserAuth } from '../../configs/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const webLinks = [
-  { name: 'About', path: '/about' },
-  { name: 'Blog', path: '/blog' }
+  { name: 'PatchNotes', path: '/changelog' },
+  { name: 'Wiki', path: '/blog' }
 ];
+
+const startGameLink =[
+  { name: 'Start', path: '/game' },
+
+]
+
 const signup = [
   { name: 'SignUp', path: '/signup' },
   { name: 'Login', path: '/login' }
 ];
-
 const signedIn = [
   { name: 'Profile', path: '/#' },
   { name: 'Logout', path: '/#' }
 ];
-
 const mobileLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Open Source', path: '/open-source' },
   { name: 'Blog', path: '/blog' },
   { name: 'Changelog', path: '/changelog' }
 ];
-
 const dropdownLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Tech Stack', path: '/tech-stack' },
@@ -63,13 +66,12 @@ const dropdownLinks = [
   { name: 'Changelog', path: '/changelog' }
   // { name: "Developer Story", path: "/developer-story" }
 ];
-
-const profiledropdownLinks =[
+const profiledropdownLinks = [
   { name: 'UserProfile', path: '/#' },
   { name: 'Transaction', path: '/#' },
   { name: 'Bug Report', path: '/#' },
-  { name: 'Logout', path: '/logout' },
-]
+  { name: 'Logout', path: '/logout' }
+];
 
 interface NavLinkProps {
   index?: number;
@@ -105,6 +107,33 @@ const NavLink = (props: NavLinkProps) => {
         {props.name}
       </Link>
     </NextLink>
+  );
+};
+
+const NavNormalLink = (props: NavLinkProps) => {
+  const router = useRouter();
+  const link = {
+    bg: useColorModeValue('gray.200', 'gray.700'),
+    color: useColorModeValue('blue.500', 'blue.200')
+  };
+
+  return (
+      <Link href={props.path}
+        px={3}
+        py={1}
+        lineHeight="inherit"
+        rounded={'md'}
+        _hover={{
+          textDecoration: 'none',
+          bg: link.bg,
+          color: props.linkColor
+        }}
+        bg={router.pathname === props.path ? link.bg : 'transparent'}
+        color={router.pathname === props.path ? props.linkColor : 'inherit'}
+        onClick={() => props.onClose()}
+      >
+        {props.name}
+      </Link>
   );
 };
 
@@ -146,11 +175,17 @@ const MenuLink = (props: MenuLinkProps) => {
 };
 
 export default function TopNav() {
-  const { user } = UserAuth();
-
+  const { user,SetGameState , isGameOpen } = UserAuth();
   const linkColor = useLinkColor();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const pathname = usePathname();
+  console.log(pathname);
+  console.log(isGameOpen);
+
+  if(pathname!= "/game"){
+    SetGameState(false);
+  }
 
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
@@ -196,21 +231,57 @@ export default function TopNav() {
           />
           <HStack spacing={8} alignItems={'center'}>
             <MotionBox whileHover={{ scale: 1.5 }}>
+
+        {!isGameOpen? (
               <NextLink href={'/'} passHref>
                 <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
               </NextLink>
+        ) : (
+          
+              <Link href={'/'} >
+                <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
+              </Link>
+        )}
+
             </MotionBox>
             <HStack as={'nav'} spacing={3} display={{ base: 'none', md: 'flex' }}>
-              {webLinks.map((link, index) => (
-                <NavLink
-                  key={index}
-                  name={link.name}
-                  path={link.path}
-                  linkColor={linkColor}
-                  onClose={onClose}
-                />
-              ))}
-              <Menu autoSelect={false} isLazy>
+              {!isGameOpen ? (
+                <div>
+                  {startGameLink.map((link, index) => (
+                    <NavNormalLink
+                      key={index}
+                      name={link.name}
+                      path={link.path}
+                      linkColor={linkColor}
+                      onClose={onClose}
+                    />
+                  ))}
+
+                  {webLinks.map((link, index) => (
+                    <NavLink
+                      key={index}
+                      name={link.name}
+                      path={link.path}
+                      linkColor={linkColor}
+                      onClose={onClose}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  {webLinks.map((link, index) => (
+                    <NavNormalLink
+                      key={index}
+                      name={link.name}
+                      path={link.path}
+                      linkColor={linkColor}
+                      onClose={onClose}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* <Menu autoSelect={false} isLazy>
                 {({ isOpen, onClose }) => (
                   <>
                     <MenuButton
@@ -260,7 +331,9 @@ export default function TopNav() {
                     </MenuList>
                   </>
                 )}
-              </Menu>
+              </Menu> */}
+
+
             </HStack>
           </HStack>
 
@@ -273,13 +346,11 @@ export default function TopNav() {
                 color={linkColor}
                 mr={2}
               />
-              {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
+              <ColorModeSwitcher justifySelf="flex-end" />
             </Flex>
 
-            {user
-              ? (
-
-                <Menu autoSelect={false} isLazy>
+            {user ? (
+              <Menu autoSelect={false} isLazy>
                 {({ isOpen, onClose }) => (
                   <>
                     <MenuButton
@@ -316,7 +387,6 @@ export default function TopNav() {
                       )}
                     >
                       {profiledropdownLinks.map((link, index) => (
-                        
                         <MenuLink
                           key={index}
                           path={link.path}
@@ -331,24 +401,17 @@ export default function TopNav() {
                   </>
                 )}
               </Menu>
-
-              )
-              : signup.map((link, index) => (
-                  <NavLink
-                    key={index}
-                    name={link.name}
-                    path={link.path}
-                    linkColor={linkColor}
-                    onClose={onClose}
-                  />
-                )
-                
-                )}
-
-                
-
-                
-
+            ) : (
+              signup.map((link, index) => (
+                <NavLink
+                  key={index}
+                  name={link.name}
+                  path={link.path}
+                  linkColor={linkColor}
+                  onClose={onClose}
+                />
+              ))
+            )}
           </HStack>
         </Flex>
 

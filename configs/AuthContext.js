@@ -14,7 +14,7 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [isGameOpen , setisGameOpen] = useState(false);
 
     const isAuthed = () =>
         new Promise((resolve, reject) => {
@@ -31,6 +31,10 @@ export const AuthContextProvider = ({ children }) => {
             console.error("Error during sign-in:", error);
         }
     };
+
+    const SetGameState = async(param) =>{
+        setisGameOpen(param); 
+    }
 
     const logOut = () => {
         signOut(auth);
@@ -62,7 +66,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [user]);
 
     return (
-        <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
+        <AuthContext.Provider value={{ user, googleSignIn, logOut , SetGameState ,isGameOpen }}>
             {loading ? <LoadingScreen /> : children}
         </AuthContext.Provider>
     );

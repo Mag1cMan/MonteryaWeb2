@@ -3,13 +3,22 @@ import { Box } from '@chakra-ui/react';
 import TopNav from '../shared/top-nav';
 import Footer from '../shared/footer';
 import styles from './appLayout.module.css';
+import { usePathname } from 'next/navigation';
 
 function AppLayout(props) {
+  const pathname = usePathname();
+
   return (
     <Fragment>
       <TopNav />
       <DottedSvgs />
-      <Box textAlign="center" fontSize="xl" w={['90%', '85%', '80%']} maxW={800} mx="auto">
+      <Box
+        textAlign="center"
+        fontSize="xl"
+        w={['90%', '85%', '80%']}
+        maxW={pathname === "/game" ? 1200 : 800}
+        mx="auto"
+      >
         <Box pt={'7rem'} pb={10}>
           {props.children}
         </Box>

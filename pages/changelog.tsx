@@ -11,9 +11,9 @@ import ListSkeleton from 'components/changelog/list-skeleton';
 import PrList from 'components/changelog/List';
 
 const TURQUOISE = '#06b6d4';
-const title = 'Changelog';
+const title = 'PatchNotes';
 const subtitle =
-  "The Changelog gives an overview of the meaningful changes I've made to my portfolio website.";
+  "Improved user experience by providing transparency about website modifications and enhancements.";
 
 const ChangeLog = () => {
   const { prData } = fetchPRsData();

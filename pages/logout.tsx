@@ -29,15 +29,16 @@ const TURQUOISE = '#06b6d4';
 import React from 'react';
 import { UserAuth } from '../configs/AuthContext';
 import NextLink from 'next/link';
+import Link from 'next/link';
 
 const authentication = () => {
-    const { user, logOut } = UserAuth();
+  const { user, logOut } = UserAuth();
 
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.100', 'gray.700');
 
-  if(user){
-      logOut();
+  if (user) {
+    logOut();
   }
   return (
     <PageLayout title="Open-source" keywords="A list of open source projects">
@@ -51,20 +52,19 @@ const authentication = () => {
             </Header>
             <HStack>
               <Stack spacing={4} pt={2}>
-                <Button
-                  loadingText="Submitting"
-                  bg={'blue.400'}
-                  color={'black'}
-                  _hover={{
-                    bg: 'blue.500'
-                  }}
-                >
-                  <NextLink href="/signup" passHref>
-                                <a>
-                                    Back To Main
-                                </a>
-                            </NextLink>
-                </Button>
+                <Link href="/" passHref>
+                  <Button
+                    as="a" // This makes the Button behave like an <a> tag
+                    loadingText="Submitting"
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                      color: 'black'
+                    }}
+                  >
+                    Back To Main
+                  </Button>
+                </Link>
               </Stack>
             </HStack>
           </VStack>

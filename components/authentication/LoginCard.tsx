@@ -44,7 +44,7 @@ export default function LoginCard() {
           <Stack pt={6}>
             <Text align={'center'}>
               <Link href="/signup" passHref>
-                <a>New User? SignUp</a>
+                New User? SignUp
               </Link>
             </Text>
           </Stack>

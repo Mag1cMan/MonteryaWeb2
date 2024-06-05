@@ -53,8 +53,9 @@
     "@types/react": "17.0.2",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
-    "eslint": "7.28.0",
+    "eslint": "^7.28.0",
     "eslint-config-next": "^14.2.3",
+    "eslint-plugin-react": "^7.34.2",
     "prettier": "^3.0.0",
     "prisma": "^5.1.0",
     "typescript": "^5.1.6"

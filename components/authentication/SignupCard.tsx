@@ -69,10 +69,8 @@ export default function SignupCard() {
             <Text align={'center'}>
 
             <NextLink href="/login" passHref>
-              <a>
                 {/* Content goes here */}
                 Already a user? Login
-              </a>
             </NextLink>
 
 

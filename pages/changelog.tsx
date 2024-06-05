@@ -3,7 +3,7 @@ import { PageSlideFade, StaggerChildren } from 'components/shared/animations/pag
 import { MotionBox } from 'components/shared/animations/motion';
 import Header from 'components/shared/header';
 import PageLayout from 'components/layouts/pageLayout';
-import { fetchPRsData } from 'lib/githubApi';
+import { fetchPRsData } from 'lib/FirebaseAPI';
 import { remark } from 'remark';
 import html from 'remark-html';
 import { Fragment, useEffect, useState } from 'react';

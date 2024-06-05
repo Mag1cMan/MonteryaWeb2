@@ -180,9 +180,7 @@ export default function TopNav() {
   console.log(pathname);
   console.log(isGameOpen);
 
-  if(pathname!= "/game"){
-    SetGameState(false);
-  }
+  
 
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
@@ -196,6 +194,11 @@ export default function TopNav() {
     };
 
     checkAuthentication();
+
+    if(pathname!= "/game"){
+      SetGameState(false);
+    }
+
   }, [user]);
 
   return (

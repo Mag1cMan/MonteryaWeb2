@@ -4,7 +4,6 @@ import {
   Button,
   Stack,
   HStack,
-  useColorModeValue,
   VStack
 } from '@chakra-ui/react';
 import { PageSlideFade } from 'components/shared/animations/page-transitions';
@@ -14,7 +13,7 @@ import PageLayout from 'components/layouts/pageLayout';
 
 const TURQUOISE = '#06b6d4';
 
-import React from 'react';
+import React ,{Fragment, useEffect} from 'react';
 import Link from 'next/link';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 import { UserAuth } from '../../configs/AuthContext';

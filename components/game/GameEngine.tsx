@@ -1,7 +1,21 @@
 'use client';
-import React, { Fragment, useEffect } from 'react';
 // import React, { Fragment, useCallback, useEffect } from "react";
+import {
+  Button,
+  Stack,
+  HStack,
+  useColorModeValue,
+  VStack
+} from '@chakra-ui/react';
+import { PageSlideFade } from 'components/shared/animations/page-transitions';
+import Header from 'components/shared/header';
 
+import PageLayout from 'components/layouts/pageLayout';
+
+const TURQUOISE = '#06b6d4';
+
+import React from 'react';
+import Link from 'next/link';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 import { UserAuth } from '../../configs/AuthContext';
 const unityContextLocation = 'Unity-WebGl-Build/Build';
@@ -12,7 +26,39 @@ export default function GameEngine() {
   console.log('Trigger Unity');
   console.log(user);
   if (user == null) {
-    return null;
+    return (
+      <PageLayout title="Open-source" keywords="A list of open source projects">
+      <PageSlideFade>
+        <VStack align="center" spacing={4}>
+          <VStack width={'100%'} align="center">
+            {' '}
+            {/* Use VStack instead of HStack */}
+            <Header underlineColor={TURQUOISE} mt={0} mb={0}>
+              Not Authorized
+            </Header>
+            <HStack>
+              <Stack spacing={4} pt={2}>
+                <Link href="/" passHref>
+                  <Button
+                    as="a" // This makes the Button behave like an <a> tag
+                    loadingText="Submitting"
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                      color: 'black'
+                    }}
+                  >
+                    Back To Main
+                  </Button>
+                </Link>
+              </Stack>
+            </HStack>
+          </VStack>
+        </VStack>
+      </PageSlideFade>
+    </PageLayout>
+
+    )
   }
 
   SetGameState(true);

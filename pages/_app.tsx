@@ -17,12 +17,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
+      console.log(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+  
 
   return (
     <ChakraProvider theme={theme} resetCSS={true}>

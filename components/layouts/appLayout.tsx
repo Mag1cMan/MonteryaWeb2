@@ -5,9 +5,16 @@ import Footer from '../shared/footer';
 import styles from './appLayout.module.css';
 import { usePathname } from 'next/navigation';
 
+const maxWMapping = {
+  "/game": 1200,
+  "/patchnotes": 800,
+  "/" : "max-w-max",
+};
+
 function AppLayout(props) {
   const pathname = usePathname();
-
+  const maxW = maxWMapping[pathname] || 800; // Default to 800 if the path is not in the mapping
+  const isHomePage = pathname === "/";
   return (
     <Fragment>
       <TopNav />
@@ -15,11 +22,12 @@ function AppLayout(props) {
       <Box
         textAlign="center"
         fontSize="xl"
-        w={['90%', '85%', '80%']}
-        maxW={pathname === "/game" ? 1200 : 800}
+        w={isHomePage ? null : ['90%', '85%', '80%']}
+        maxW={maxW}
         mx="auto"
+        py={isHomePage ? '4rem' : undefined} // Set py to '5rem' only if it's the home page
       >
-        <Box pt={'7rem'} pb={10}>
+        <Box pt={isHomePage ? undefined : '7rem'} pb={10}> {/* Adjust the padding top for the home page */}
           {props.children}
         </Box>
       </Box>

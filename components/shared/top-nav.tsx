@@ -39,10 +39,7 @@ const webLinks = [
   { name: 'Wiki', path: '/blog' }
 ];
 
-const startGameLink =[
-  { name: 'Start', path: '/game' },
-
-]
+const startGameLink = [{ name: 'Start', path: '/game' }];
 
 const signup = [
   { name: 'SignUp', path: '/signup' },
@@ -50,19 +47,19 @@ const signup = [
 ];
 
 const mobileLinks = [
-  { name: 'Projects', path: '/projects' },
-  { name: 'Open Source', path: '/open-source' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'Changelog', path: '/changelog' }
+  { name: 'Home', path: '/' },
+  { name: 'PatchNotes', path: '/changelog' },
+  { name: 'SignUp', path: '/signup' },
+  { name: 'Login', path: '/login' }
 ];
-// const dropdownLinks = [
-//   { name: 'Projects', path: '/projects' },
-//   { name: 'Tech Stack', path: '/tech-stack' },
-//   { name: 'Open Source', path: '/open-source' },
-//   { name: 'Achievements', path: '/achievements' },
-//   { name: 'Changelog', path: '/changelog' }
-//   // { name: "Developer Story", path: "/developer-story" }
-// ];
+const dropdownLinks = [
+  { name: 'Projects', path: '/projects' },
+  { name: 'Tech Stack', path: '/tech-stack' },
+  { name: 'Open Source', path: '/open-source' },
+  { name: 'Achievements', path: '/achievements' },
+  { name: 'Changelog', path: '/changelog' }
+  // { name: "Developer Story", path: "/developer-story" }
+];
 const profiledropdownLinks = [
   { name: 'UserProfile', path: '/#' },
   { name: 'Transaction', path: '/#' },
@@ -95,11 +92,15 @@ const NavLink = (props: NavLinkProps) => {
         _hover={{
           textDecoration: 'none',
           bg: link.bg,
-          color: props.linkColor
+          // color: props.linkColor
+          color: 'white'
         }}
         bg={router.pathname === props.path ? link.bg : 'transparent'}
-        color={router.pathname === props.path ? props.linkColor : 'inherit'}
-        onClick={() => props.onClose()}
+        // color={router.pathname === props.path ? props.linkColor : 'inherit'}
+        color={'white'}
+        onClick={() => {
+          props.onClose();
+        }}
       >
         {props.name}
       </Link>
@@ -115,22 +116,25 @@ const NavNormalLink = (props: NavLinkProps) => {
   };
 
   return (
-      <Link href={props.path}
-        px={3}
-        py={1}
-        lineHeight="inherit"
-        rounded={'md'}
-        _hover={{
-          textDecoration: 'none',
-          bg: link.bg,
-          color: props.linkColor
-        }}
-        bg={router.pathname === props.path ? link.bg : 'transparent'}
-        color={router.pathname === props.path ? props.linkColor : 'inherit'}
-        onClick={() => props.onClose()}
-      >
-        {props.name}
-      </Link>
+    <Link
+      href={props.path}
+      px={3}
+      py={1}
+      lineHeight="inherit"
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: link.bg,
+        // color: props.linkColor
+        color: 'white'
+      }}
+      bg={router.pathname === props.path ? link.bg : 'transparent'}
+      // color={router.pathname === props.path ? props.linkColor : 'inherit'}
+      color={'white'}
+      onClick={() => props.onClose()}
+    >
+      {props.name}
+    </Link>
   );
 };
 
@@ -172,15 +176,11 @@ const MenuLink = (props: MenuLinkProps) => {
 };
 
 export default function TopNav() {
-  const { user,SetGameState , isGameOpen } = UserAuth();
+  const { user, SetGameState, isGameOpen } = UserAuth();
   const linkColor = useLinkColor();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const pathname = usePathname();
-  console.log(pathname);
-  console.log(isGameOpen);
-
-  
 
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
@@ -195,10 +195,9 @@ export default function TopNav() {
 
     checkAuthentication();
 
-    if(pathname!= "/game"){
+    if (pathname != '/game') {
       SetGameState(false);
     }
-
   }, [user]);
 
   return (
@@ -231,18 +230,15 @@ export default function TopNav() {
           />
           <HStack spacing={8} alignItems={'center'}>
             <MotionBox whileHover={{ scale: 1.5 }}>
-
-        {!isGameOpen? (
-              <NextLink href={'/'} passHref>
-                <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
-              </NextLink>
-        ) : (
-          
-              <Link href={'/'} >
-                <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
-              </Link>
-        )}
-
+              {!isGameOpen ? (
+                <NextLink href={'/'} passHref>
+                  <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
+                </NextLink>
+              ) : (
+                <Link href={'/'}>
+                  <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
+                </Link>
+              )}
             </MotionBox>
             <HStack as={'nav'} spacing={3} display={{ base: 'none', md: 'flex' }}>
               {!isGameOpen ? (
@@ -332,8 +328,6 @@ export default function TopNav() {
                   </>
                 )}
               </Menu> */}
-
-
             </HStack>
           </HStack>
 

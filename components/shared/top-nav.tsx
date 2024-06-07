@@ -52,14 +52,14 @@ const mobileLinks = [
   { name: 'SignUp', path: '/signup' },
   { name: 'Login', path: '/login' }
 ];
-const dropdownLinks = [
-  { name: 'Projects', path: '/projects' },
-  { name: 'Tech Stack', path: '/tech-stack' },
-  { name: 'Open Source', path: '/open-source' },
-  { name: 'Achievements', path: '/achievements' },
-  { name: 'Changelog', path: '/changelog' }
-  // { name: "Developer Story", path: "/developer-story" }
-];
+// const dropdownLinks = [
+//   { name: 'Projects', path: '/projects' },
+//   { name: 'Tech Stack', path: '/tech-stack' },
+//   { name: 'Open Source', path: '/open-source' },
+//   { name: 'Achievements', path: '/achievements' },
+//   { name: 'Changelog', path: '/changelog' }
+//   // { name: "Developer Story", path: "/developer-story" }
+// ];
 const profiledropdownLinks = [
   { name: 'UserProfile', path: '/#' },
   { name: 'Transaction', path: '/#' },

@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
-import { redirect } from "next/navigation";
 import { db } from '../../../configs/firebase';
-import { addDoc, collection, doc, getDoc , serverTimestamp, setDoc} from "firebase/firestore";
+import {  doc , serverTimestamp, setDoc} from "firebase/firestore";
+// import { addDoc, collection, doc, getDoc , serverTimestamp, setDoc} from "firebase/firestore";
 
 
 // Fix these to handler error accordingly
@@ -17,7 +17,7 @@ export async function CheckDupes(data: {
 
         const json = {email: data.email};
         console.log(json);
-        const auth = getAuth();
+        // const auth = getAuth();
         const response = await fetch("https://api.monterya.com/AuthTest/Web/Checkduplicate", {
         method: "POST",
         headers: {
@@ -118,12 +118,13 @@ export async function readUserSession(){
 
 export async function AfterGoogleSignUp() {
     console.log("Trigger After goolg login")
-    addUserToDatabase();
+    // Need to add user data from Email to here
+    //addUserToDatabase();
 }
 
 
 
-async function setUserData(user:any) {
+async function setUserData(user) {
     try {
         const docRef = doc(db, "users", user.uid);
         await setDoc(docRef, {

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { SEO_IMAGE } from 'data/constants';
 
 type Props = {
   title: string;

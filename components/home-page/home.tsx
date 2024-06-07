@@ -1,30 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Flex, Avatar, Box, AspectRatio, Link, Image, Text ,Button, SimpleGrid, useMediaQuery, HStack } from '@chakra-ui/react';
+import { Flex, Avatar, Box, Link, Text, useMediaQuery, HStack } from '@chakra-ui/react';
 import { MotionBox, MotionFlex } from 'components/shared/animations/motion';
 import Header from 'components/shared/header';
 // import { useLinkColor } from 'components/theme';
 // import PopularArticles from './PopularArticles';
 import { BlogPostProps } from 'interfaces/interface';
 import AutoSliderShow from 'components/shared/AutoSliderShow';
-import { ChakraProvider } from '@chakra-ui/react';
 import { linkColors } from 'components/theme/colors';
 import NextLink from 'next/link'
 
-const images = [
-  { src: '/rabbit_nobg.png', alt: 'Image 1' },
-  { src: '/yinglong_nobg.png', alt: 'Image 2' },
-  { src: '/estech_nogb.png', alt: 'Image 3' }
-];
+
 const ANIMATION_DURATION = 0.5;
 const ORANGE = '#ff9400';
 // const emojis = ['👋', '👍', '🖐'];
 const gifUrl = '/assets/icons/Coin.gif';
 
-const link = [
-  { name: 'PatchNotes', path: '/changelog' },
-  { name: 'Login', path: '/login' },
-  { name: 'SignUp', path: '/signup' }
-];
+// const link = [
+//   { name: 'PatchNotes', path: '/changelog' },
+//   { name: 'Login', path: '/login' },
+//   { name: 'SignUp', path: '/signup' }
+// ];
 
 // const Home: React.FC<BlogPostProps> = (props) => {
 

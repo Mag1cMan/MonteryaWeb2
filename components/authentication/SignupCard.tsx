@@ -53,11 +53,11 @@ export default function SignupCard() {
     setIsSubmitting(true);
     try {
       const result = await signUpWithEmail(data);
-      const { status } = JSON.parse(result);
-      console.log(status.error);
+      const { status, error } = JSON.parse(result);
       if (status !== 200) {
         toast({
           title: "Signup Failed",
+          description: error,
           position: 'bottom-right',
           status: "warning",
           isClosable: true,
@@ -83,6 +83,7 @@ export default function SignupCard() {
       setIsSubmitting(false);
     }
   }
+
 
   return (
     <Box

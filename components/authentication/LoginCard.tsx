@@ -122,7 +122,7 @@ export default function LoginCard() {
               }}
               type="submit"
               isLoading={isSubmitting}>
-              Sign up
+              Login
             </Button>
             <OAuthForm />
           </Stack>

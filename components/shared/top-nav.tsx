@@ -14,7 +14,18 @@ import {
   MenuList,
   MenuItem,
   Stack,
-  Icon
+  Icon,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalFooter,
+  Textarea
 } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -33,6 +44,8 @@ import { MotionBox } from 'components/shared/animations/motion';
 import { UserAuth } from '../../configs/AuthContext';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+
 
 const webLinks = [
   { name: 'PatchNotes', path: '/changelog' },
@@ -182,6 +195,12 @@ export default function TopNav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const pathname = usePathname();
 
+
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
+
+ 
+
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
     color: useColorModeValue('blue.500', 'blue.200')
@@ -330,6 +349,7 @@ export default function TopNav() {
               </Menu> */}
             </HStack>
           </HStack>
+          <Button onClick={onOpen}>Bug Report</Button>
 
           <HStack as={'nav'} spacing={3} display={{ base: 'none', md: 'flex' }}>
             <Flex alignItems={'center'}>
@@ -407,6 +427,39 @@ export default function TopNav() {
               ))
             )}
           </HStack>
+
+
+          <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay  />
+        <ModalContent >
+          <ModalHeader > Bug Report </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Bug</FormLabel>
+              <Input ref={initialRef} placeholder='First name' />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Bug Details</FormLabel>
+                <Textarea placeholder='Here is a sample placeholder' />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3}>
+              Send
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
         </Flex>
 
         {isOpen ? (

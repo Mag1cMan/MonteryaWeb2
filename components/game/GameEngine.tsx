@@ -129,3 +129,5 @@ export default function GameEngine() {
     </div>
   );
 }
+
+// Add a game pasue or not focus the game for a time ***********

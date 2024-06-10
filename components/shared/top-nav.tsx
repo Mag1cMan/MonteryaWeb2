@@ -25,15 +25,22 @@ import {
   Input,
   Modal,
   ModalFooter,
-  Textarea
+  Textarea,
+  Tooltip
 } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ColorModeSwitcher } from '../theme/ColorModeSwitcher';
 import { AiTwotoneThunderbolt } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
-import { CgArrowsExchange } from 'react-icons/cg';
-import { BsCheckCircle } from 'react-icons/bs';
+import {
+  CgAttribution,
+  CgDebug,
+  CgLogOut,
+  CgNotes,
+  CgProfile,
+  CgStack
+} from 'react-icons/cg';
 import { MdTimeline } from 'react-icons/md';
 import { BsBook } from 'react-icons/bs';
 import NextLink from 'next/link';
@@ -45,12 +52,7 @@ import { UserAuth } from '../../configs/AuthContext';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-
-
-const webLinks = [
-  { name: 'PatchNotes', path: '/changelog' },
-  { name: 'Wiki', path: '/blog' }
-];
+import { CiMoneyBill } from "react-icons/ci";
 
 const startGameLink = [{ name: 'Start', path: '/game' }];
 
@@ -65,18 +67,21 @@ const mobileLinks = [
   { name: 'SignUp', path: '/signup' },
   { name: 'Login', path: '/login' }
 ];
-// const dropdownLinks = [
-//   { name: 'Projects', path: '/projects' },
-//   { name: 'Tech Stack', path: '/tech-stack' },
-//   { name: 'Open Source', path: '/open-source' },
-//   { name: 'Achievements', path: '/achievements' },
-//   { name: 'Changelog', path: '/changelog' }
-//   // { name: "Developer Story", path: "/developer-story" }
-// ];
+
+const dropdownLinks = [
+  { name: 'PatchNotes', path: '/changelog' },
+  { name: 'RoadMap', path: '/achievements' },
+  { name: 'Blog', path: '/blog' }
+  // { name: 'Projects', path: '/projects' },
+  // { name: 'Tech Stack', path: '/tech-stack' },
+  // { name: 'Open Source', path: '/open-source' },
+  // { name: 'Achievements', path: '/achievements' },
+  // { name: "Developer Story", path: "/developer-story" }
+];
+
 const profiledropdownLinks = [
-  { name: 'UserProfile', path: '/#' },
-  { name: 'Transaction', path: '/#' },
-  { name: 'Bug Report', path: '/#' },
+  { name: 'UserProfile', path: '/profile' },
+  { name: 'Transaction', path: '/transaction' },
   { name: 'Logout', path: '/logout' }
 ];
 
@@ -86,6 +91,7 @@ interface NavLinkProps {
   path: string;
   linkColor: string;
   onClose: () => void;
+  
 }
 
 const NavLink = (props: NavLinkProps) => {
@@ -118,6 +124,9 @@ const NavLink = (props: NavLinkProps) => {
         {props.name}
       </Link>
     </NextLink>
+
+        
+
   );
 };
 
@@ -161,22 +170,42 @@ interface MenuLinkProps {
 }
 
 // Show Icon
-const MenuLink = (props: MenuLinkProps) => {
+const MenuLink = (props: MenuLinkProps & { isOpen: boolean }) => {
   const iconsObj = {
     '/tech-stack': <Icon as={AiTwotoneThunderbolt} size={18} color={props.color} />,
     '/open-source': <Icon as={BsBook} size={18} color={props.color} />,
-    '/achievements': <Icon as={BsCheckCircle} size={18} color={props.color} />,
+    '/achievements': <Icon as={CgAttribution} size={18} color={props.color} />,
     '/projects': <Icon as={MdTimeline} size={18} color={props.color} />,
-    '/changelog': <Icon as={CgArrowsExchange} size={18} color={props.color} />
+    '/changelog': <Icon as={CgStack} size={18} color={props.color} />,
+    '/blog': <Icon as={CgNotes} size={18} color={props.color} />,
+    '/logout': <Icon as={CgLogOut} size={18} color={props.color} />,
+    '/profile': <Icon as={CgProfile} size={18} color={props.color} />,
+    '/transaction': <Icon as={CiMoneyBill} size={18} color={props.color} />
   };
 
   return (
-    <NextLink href={props.path} passHref>
-      <Link onClick={() => props.onClose()}>
+    !props.isOpen ? (
+      <NextLink href={props.path} passHref>
+        <Link onClick={() => props.onClose()}>
+          <MenuItem
+            color={props.rPath === props.path && props.color}
+            bg={props.rPath === props.path && props.bg}
+            _hover={{ color: props.color, bg: props.bg }}
+          >
+            <HStack>
+              {iconsObj[props.path]}
+              <Text>{props.name}</Text>
+            </HStack>
+          </MenuItem>
+        </Link>
+      </NextLink>
+    ) : (
+      <Link href={props.path}>
         <MenuItem
           color={props.rPath === props.path && props.color}
           bg={props.rPath === props.path && props.bg}
           _hover={{ color: props.color, bg: props.bg }}
+          onClick={() => props.onClose()}
         >
           <HStack>
             {iconsObj[props.path]}
@@ -184,22 +213,18 @@ const MenuLink = (props: MenuLinkProps) => {
           </HStack>
         </MenuItem>
       </Link>
-    </NextLink>
+    )
   );
 };
 
 export default function TopNav() {
   const { user, SetGameState, isGameOpen } = UserAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const linkColor = useLinkColor();
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const pathname = usePathname();
-
-
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
-
- 
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
 
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
@@ -272,7 +297,7 @@ export default function TopNav() {
                     />
                   ))}
 
-                  {webLinks.map((link, index) => (
+                  {/* {webLinks.map((link, index) => (
                     <NavLink
                       key={index}
                       name={link.name}
@@ -280,11 +305,11 @@ export default function TopNav() {
                       linkColor={linkColor}
                       onClose={onClose}
                     />
-                  ))}
+                  ))} */}
                 </div>
               ) : (
                 <div>
-                  {webLinks.map((link, index) => (
+                  {/* {webLinks.map((link, index) => (
                     <NavNormalLink
                       key={index}
                       name={link.name}
@@ -292,11 +317,11 @@ export default function TopNav() {
                       linkColor={linkColor}
                       onClose={onClose}
                     />
-                  ))}
+                  ))} */}
                 </div>
               )}
 
-              {/* <Menu autoSelect={false} isLazy>
+              <Menu autoSelect={false} isLazy>
                 {({ isOpen, onClose }) => (
                   <>
                     <MenuButton
@@ -341,15 +366,16 @@ export default function TopNav() {
                           color={linkColor}
                           bg={menuProps.bg}
                           rPath={router.pathname}
+                          isOpen={isGameOpen} // Pass the isOpen prop here
+
                         />
                       ))}
                     </MenuList>
                   </>
                 )}
-              </Menu> */}
+              </Menu>
             </HStack>
           </HStack>
-          <Button onClick={onOpen}>Bug Report</Button>
 
           <HStack as={'nav'} spacing={3} display={{ base: 'none', md: 'flex' }}>
             <Flex alignItems={'center'}>
@@ -409,9 +435,17 @@ export default function TopNav() {
                           color={linkColor}
                           bg={menuProps.bg}
                           rPath={router.pathname}
+                          isOpen={isGameOpen}
                         />
                       ))}
                     </MenuList>
+                    <Tooltip label="Bug Report" aria-label="Bug Report">
+  <IconButton
+    onClick={onOpen}
+    aria-label="Bug Report"
+    icon={<Icon as={CgDebug} color="red" boxSize={6} />}
+  />
+</Tooltip>
                   </>
                 )}
               </Menu>
@@ -428,38 +462,37 @@ export default function TopNav() {
             )}
           </HStack>
 
-
           <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay  />
-        <ModalContent >
-          <ModalHeader > Bug Report </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Bug</FormLabel>
-              <Input ref={initialRef} placeholder='First name' />
-            </FormControl>
+            initialFocusRef={initialRef}
+            finalFocusRef={finalRef}
+            isOpen={isOpen}
+            onClose={onClose}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader> Bug Report </ModalHeader>
 
-            <FormControl mt={4}>
-              <FormLabel>Bug Details</FormLabel>
-                <Textarea placeholder='Here is a sample placeholder' />
-            </FormControl>
-          </ModalBody>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <FormControl>
+                  <FormLabel>Bug</FormLabel>
+                  <Input ref={initialRef} placeholder="First name" />
+                </FormControl>
 
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
-              Send
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+                <FormControl mt={4}>
+                  <FormLabel>Bug Details</FormLabel>
+                  <Textarea placeholder="Here is a sample placeholder" />
+                </FormControl>
+              </ModalBody>
 
+              <ModalFooter>
+                <Button colorScheme="blue" mr={3}>
+                  Send
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Flex>
 
         {isOpen ? (

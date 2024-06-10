@@ -128,8 +128,8 @@ export default function LoginCard() {
           </Stack>
           <Stack pt={6}>
             <Text align={'center'}>
-              <NextLink href="/login" passHref>
-                Already a user? Login
+              <NextLink href="/signup" passHref>
+                Not a user? SignUp!
               </NextLink>
             </Text>
           </Stack>

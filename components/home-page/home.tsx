@@ -68,6 +68,7 @@ const Home: React.FC<BlogPostProps> = () => {
         </Box>
       </MotionBox>
 
+
       <Flex direction={['column', 'column', 'row']}>
         <MotionBox
           opacity="0"
@@ -91,6 +92,7 @@ const Home: React.FC<BlogPostProps> = () => {
           </MotionBox>
         )}
         </MotionBox>
+
 
         <MotionFlex
           position="relative"

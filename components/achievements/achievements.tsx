@@ -19,16 +19,6 @@ interface ExternalLinkProps extends LinkProps {
   text: string;
 }
 
-// const ExternalLink: React.FC<ExternalLinkProps> = ({ url, linkProps, text, ...props }) => {
-//   return (
-//     <NextLink href={url} passHref>
-//       <Link {...linkProps} {...props}>
-//         {text}
-//       </Link>
-//     </NextLink>
-//   );
-// };
-
 const InternalLink: React.FC<ExternalLinkProps> = ({ url, linkProps, text, ...props }) => {
   return (
     <NextLink href={url} passHref>

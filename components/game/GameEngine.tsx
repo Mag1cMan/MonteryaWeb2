@@ -30,32 +30,29 @@ export default function GameEngine() {
       <PageSlideFade>
         <VStack align="center" spacing={4}>
           <VStack width={'100%'} align="center">
-            {' '}
-            {/* Use VStack instead of HStack */}
             <Header underlineColor={TURQUOISE} mt={0} mb={0}>
               Not Authorized
             </Header>
-            <HStack>
-              <Stack spacing={4} pt={2}>
-                <Link href="/" passHref>
-                  <Button
-                    as="a" // This makes the Button behave like an <a> tag
-                    loadingText="Submitting"
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                      color: 'black'
-                    }}
-                  >
-                    Back To Main
-                  </Button>
-                </Link>
-              </Stack>
-            </HStack>
+            <Stack spacing={4} pt={2}>
+              <Link href="/" passHref>
+                <Button
+                  as="a" // This makes the Button behave like an <a> tag
+                  loadingText="Submitting"
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                    color: 'black'
+                  }}
+                >
+                  Back To Main
+                </Button>
+              </Link>
+            </Stack>
           </VStack>
         </VStack>
       </PageSlideFade>
     </PageLayout>
+    
 
     )
   }

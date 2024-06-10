@@ -276,7 +276,7 @@ export default function TopNav() {
             <MotionBox whileHover={{ scale: 1.5 }}>
               {!isGameOpen ? (
                 <NextLink href={'/'} passHref>
-                  <Avatar as={Link} size={'xl'} src={'/MonteryaNoicon.png'} />
+                  <Avatar size={'xl'} src={'/MonteryaNoicon.png'} />
                 </NextLink>
               ) : (
                 <Link href={'/'}>
@@ -296,29 +296,9 @@ export default function TopNav() {
                       onClose={onClose}
                     />
                   ))}
-
-                  {/* {webLinks.map((link, index) => (
-                    <NavLink
-                      key={index}
-                      name={link.name}
-                      path={link.path}
-                      linkColor={linkColor}
-                      onClose={onClose}
-                    />
-                  ))} */}
                 </div>
               ) : (
-                <div>
-                  {/* {webLinks.map((link, index) => (
-                    <NavNormalLink
-                      key={index}
-                      name={link.name}
-                      path={link.path}
-                      linkColor={linkColor}
-                      onClose={onClose}
-                    />
-                  ))} */}
-                </div>
+                null
               )}
 
               <Menu autoSelect={false} isLazy>

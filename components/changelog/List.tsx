@@ -68,9 +68,9 @@ const PrList = ({ prList }) => {
                         <ListIcon as={GoIssueReopened} color="gray.500" />
                       )}
                       <NextLink href={pr.title} passHref>
-                        <Text as={Link} color={linkColor} target="_blank">
+                        {/* <Text as={Link} color={linkColor} target="_blank">
                           {pr.title}
-                        </Text>
+                        </Text> */}
                       </NextLink>
                     </Heading>
                     <HStack spacing={2} isInline ml={[0, 0, 6]}>

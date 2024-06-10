@@ -1,7 +1,6 @@
 import {
   Stack,
   IconButton,
-  Link,
   Box,
   Text,
   useColorModeValue,
@@ -35,7 +34,6 @@ const Footer = () => {
         alignItems="center"
         w="100%"
       >
-        {/* <HStack> */}
         <Text
           textAlign="center"
           fontSize="sm"
@@ -43,31 +41,14 @@ const Footer = () => {
         >
           © {new Date().getFullYear()} Monterya{" "}
         </Text>
-        {/* <Box fontSize="md" textAlign="left">
-        Website built with
-        <Box
-          as="span"
-          mx="2"
-          _before={{
-            cursor: "default",
-            content: '"❤️"'
-          }}
-          _hover={{
-            _before: {
-              content: '"☕️"'
-            }
-          }}
-        />
-        in Pakistan{"  "}🇵🇰
-      </Box> */}
-        {/* </HStack> */}
         <Box textAlign="center">
           {siteConfig.author.accounts.map((sc, index) => (
             <IconButton
               key={index}
-              as={Link}
-              isExternal
+              as="a" // Change to "a" instead of using Link component
               href={sc.url}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={sc.label}
               size="lg"
               colorScheme={sc.type}

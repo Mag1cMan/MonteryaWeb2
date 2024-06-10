@@ -1,13 +1,15 @@
-import React, { Fragment, ReactNode } from 'react'
-import { motion } from 'framer-motion'
-import Meta from '../shared/meta'
+// PageLayout.js
+
+import React, { Fragment, ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import Meta from '../shared/meta';
 
 type Props = {
-  children: ReactNode
-  title: string
-  description?: string
-  keywords?: string
-  image?: string
+  children: ReactNode;
+  title: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
 }
 
 const variants = {
@@ -19,9 +21,9 @@ const variants = {
 const PageLayout = ({
   children,
   title,
-  description,
-  keywords,
-  image,
+  description = '',
+  keywords = '',
+  image = '',
 }: Props): JSX.Element => (
   <Fragment>
     <Meta
@@ -42,4 +44,4 @@ const PageLayout = ({
   </Fragment>
 )
 
-export default PageLayout
+export default PageLayout;

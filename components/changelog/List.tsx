@@ -5,7 +5,6 @@ import {
   Heading,
   Flex,
   Text,
-  Link,
   HStack,
   ListItem,
   useColorModeValue,
@@ -21,10 +20,10 @@ import { Tag } from 'components/shared/Tags';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { GoIssueReopened } from 'react-icons/go';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLinkColor } from 'components/theme';
+// import { useLinkColor } from 'components/theme';
 
 const PrList = ({ prList }) => {
-  const linkColor = useLinkColor();
+  // const linkColor = useLinkColor();
   const textColor = useColorModeValue('gray.500', 'gray.200');
 
 

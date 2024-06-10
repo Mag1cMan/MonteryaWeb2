@@ -1,17 +1,21 @@
 import React from 'react';
-import { useColorModeValue, Button, VStack } from '@chakra-ui/react';
+import {  Button, VStack } from '@chakra-ui/react';
 import { PageSlideFade } from 'components/shared/animations/page-transitions';
 import Header from 'components/shared/header';
 import PageLayout from 'components/layouts/pageLayout';
 import { UserAuth } from '../configs/AuthContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const TURQUOISE = '#06b6d4';
 
 const Authentication = () => {
   const { user, logOut } = UserAuth();
-  const buttonColor = useColorModeValue('blue.500', 'blue.200');
-
+  const router = useRouter();
+  // const buttonColor = useColorModeValue('blue.500', 'blue.200');
+  if(!user){
+    router.push('/');
+  }
   const handleLogout = () => {
     logOut();
   };

@@ -3,7 +3,6 @@
 import {
   Button,
   Stack,
-  HStack,
   VStack
 } from '@chakra-ui/react';
 import { PageSlideFade } from 'components/shared/animations/page-transitions';

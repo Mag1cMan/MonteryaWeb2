@@ -3,7 +3,6 @@ import {
   IconButton,
   Box,
   Text,
-  useColorModeValue,
   Flex
 } from "@chakra-ui/react";
 import siteConfig from "../../configs/site-config";
@@ -37,7 +36,7 @@ const Footer = () => {
         <Text
           textAlign="center"
           fontSize="sm"
-          color={useColorModeValue("gray.500", "gray.200")}
+          color="gray.200"
         >
           © {new Date().getFullYear()} Monterya{" "}
         </Text>
@@ -51,7 +50,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               aria-label={sc.label}
               size="lg"
-              colorScheme={sc.type}
+              color={"white"}
               icon={sc.icon}
               {...iconProps}
             />

@@ -7,12 +7,15 @@ import {
 } from "@firebase/auth";
 import { auth } from "./firebase";
 import LoadingScreen from "../components/LoadingScene/LoadingScreen";
+import { authoriseUser } from "components/authentication/auth-server-action/authorsie";
+import { signupWithOAuth } from "components/authentication/auth-server-action/signup";
 //import { AfterGoogleSignUp } from "../auth-server-action/action";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [authorise, setAuthorise] = useState(false);
     const [loading, setLoading] = useState(true);
     const [isGameOpen , setisGameOpen] = useState(false);
 
@@ -25,7 +28,6 @@ export const AuthContextProvider = ({ children }) => {
         const provider = new GoogleAuthProvider();
         try {
             await signInWithPopup(auth, provider);
-            //await AfterGoogleSignUp();
             console.log("login")
         } catch (error) {
             console.error("Error during sign-in:", error);
@@ -62,11 +64,40 @@ export const AuthContextProvider = ({ children }) => {
             //   setLoading(false);
             // }
         });
+
+        const RegisterUser = async () =>{
+            try{
+                await signupWithOAuth(user);
+            }
+            catch(error){
+                console.log(error.message);
+
+            }
+
+        }
+        
+        RegisterUser();
+       
+        const fetchAuthorisation = async () => {
+            try {
+              const isAuthorised = await authoriseUser(user.uid);
+              setAuthorise(isAuthorised);
+            } catch (error) {
+              console.log(error.message);
+            }
+          };
+
+
+        fetchAuthorisation();
+
         return () => unsubscribe();
+
+
+        
     }, [user]);
 
     return (
-        <AuthContext.Provider value={{ user, googleSignIn, logOut , SetGameState ,isGameOpen }}>
+        <AuthContext.Provider value={{ user, googleSignIn, logOut , SetGameState ,isGameOpen , authorise}}>
             {loading ? <LoadingScreen /> : children}
         </AuthContext.Provider>
     );

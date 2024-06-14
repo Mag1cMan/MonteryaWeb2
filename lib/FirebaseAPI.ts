@@ -17,7 +17,10 @@ const getData = async () => {
       });
     });
 
+    // let dates: Date[] = res.map(item => new Date(item.date));
+    res.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     return res;
+    
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;

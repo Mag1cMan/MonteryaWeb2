@@ -6,7 +6,6 @@ import { PrismGlobal } from 'components/theme/prism';
 import { useRouter } from 'next/router';
 import * as gtag from 'lib/gtag';
 import { AnimatePresence } from 'framer-motion';
-import { theme } from 'components/theme';
 import { AccentGlobal } from 'components/theme/Accent';
 import { FontsGlobal } from 'components/theme/fonts';
 import { Analytics } from '@vercel/analytics/react';
@@ -17,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
-      console.log(url);
+      // console.log(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
@@ -27,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
 
   return (
-    <ChakraProvider theme={theme} resetCSS={true}>
+    <ChakraProvider resetCSS={true}>
       <FontsGlobal />
       <AccentGlobal />
       <PrismGlobal />

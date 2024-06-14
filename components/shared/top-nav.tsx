@@ -15,44 +15,25 @@ import {
   MenuItem,
   Stack,
   Icon,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  FormControl,
-  FormLabel,
-  Input,
-  Modal,
-  ModalFooter,
-  Textarea,
-  Tooltip
+  Tooltip,
 } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
-import { ColorModeSwitcher } from '../theme/ColorModeSwitcher';
 import { AiTwotoneThunderbolt } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
-import {
-  CgAttribution,
-  CgDebug,
-  CgLogOut,
-  CgNotes,
-  CgProfile,
-  CgStack
-} from 'react-icons/cg';
+import { CgAttribution, CgDebug, CgLogOut, CgNotes, CgProfile, CgStack } from 'react-icons/cg';
 import { MdTimeline } from 'react-icons/md';
 import { BsBook } from 'react-icons/bs';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { AccentPicker } from 'components/theme/Accent';
 import { useLinkColor } from 'components/theme';
 import { MotionBox } from 'components/shared/animations/motion';
 import { UserAuth } from '../../configs/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { CiMoneyBill } from "react-icons/ci";
+import { CiMoneyBill } from 'react-icons/ci';
+import BugReportModal from 'components/BugReport/BugReport';
 
 const startGameLink = [{ name: 'Start', path: '/game' }];
 
@@ -71,7 +52,7 @@ const mobileLinks = [
 const dropdownLinks = [
   { name: 'PatchNotes', path: '/changelog' },
   { name: 'RoadMap', path: '/achievements' },
-  { name: 'Blog', path: '/blog' }
+  // { name: 'Blog', path: '/blog' }
   // { name: 'Projects', path: '/projects' },
   // { name: 'Tech Stack', path: '/tech-stack' },
   // { name: 'Open Source', path: '/open-source' },
@@ -80,8 +61,9 @@ const dropdownLinks = [
 ];
 
 const profiledropdownLinks = [
-  { name: 'UserProfile', path: '/profile' },
+  { name: 'UserProfile', path: '/userprofile' },
   { name: 'Transaction', path: '/transaction' },
+  { name: 'BugReports', path: '/bugReports' },
   { name: 'Logout', path: '/logout' }
 ];
 
@@ -91,7 +73,6 @@ interface NavLinkProps {
   path: string;
   linkColor: string;
   onClose: () => void;
-  
 }
 
 const NavLink = (props: NavLinkProps) => {
@@ -124,9 +105,6 @@ const NavLink = (props: NavLinkProps) => {
         {props.name}
       </Link>
     </NextLink>
-
-        
-
   );
 };
 
@@ -147,7 +125,6 @@ const NavNormalLink = (props: NavLinkProps) => {
       _hover={{
         textDecoration: 'none',
         bg: link.bg,
-        // color: props.linkColor
         color: 'white'
       }}
       bg={router.pathname === props.path ? link.bg : 'transparent'}
@@ -179,33 +156,18 @@ const MenuLink = (props: MenuLinkProps & { isOpen: boolean }) => {
     '/changelog': <Icon as={CgStack} size={18} color={props.color} />,
     '/blog': <Icon as={CgNotes} size={18} color={props.color} />,
     '/logout': <Icon as={CgLogOut} size={18} color={props.color} />,
-    '/profile': <Icon as={CgProfile} size={18} color={props.color} />,
-    '/transaction': <Icon as={CiMoneyBill} size={18} color={props.color} />
+    '/userprofile': <Icon as={CgProfile} size={18} color={props.color} />,
+    '/transaction': <Icon as={CiMoneyBill} size={18} color={props.color} />,
+    '/bugReports': <Icon as={CgDebug} size={18} color={props.color} />
   };
 
-  return (
-    !props.isOpen ? (
-      <NextLink href={props.path} passHref>
-        <Link onClick={() => props.onClose()}>
-          <MenuItem
-            color={props.rPath === props.path && props.color}
-            bg={props.rPath === props.path && props.bg}
-            _hover={{ color: props.color, bg: props.bg }}
-          >
-            <HStack>
-              {iconsObj[props.path]}
-              <Text>{props.name}</Text>
-            </HStack>
-          </MenuItem>
-        </Link>
-      </NextLink>
-    ) : (
-      <Link href={props.path}>
+  return !props.isOpen ? (
+    <NextLink href={props.path} passHref>
+      <Link onClick={() => props.onClose()}>
         <MenuItem
-          color={props.rPath === props.path && props.color}
+          color={'white'}
           bg={props.rPath === props.path && props.bg}
-          _hover={{ color: props.color, bg: props.bg }}
-          onClick={() => props.onClose()}
+          _hover={{ color: 'white', bg: props.bg }}
         >
           <HStack>
             {iconsObj[props.path]}
@@ -213,7 +175,21 @@ const MenuLink = (props: MenuLinkProps & { isOpen: boolean }) => {
           </HStack>
         </MenuItem>
       </Link>
-    )
+    </NextLink>
+  ) : (
+    <Link href={props.path}>
+      <MenuItem
+        color={'white'}
+        bg={props.rPath === props.path && props.bg}
+        _hover={{ color: 'white', bg: props.bg }}
+        onClick={() => props.onClose()}
+      >
+        <HStack>
+          {iconsObj[props.path]}
+          <Text>{props.name}</Text>
+        </HStack>
+      </MenuItem>
+    </Link>
   );
 };
 
@@ -223,8 +199,17 @@ export default function TopNav() {
   const linkColor = useLinkColor();
   const router = useRouter();
   const pathname = usePathname();
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const [isDrawerBugOpen, setIsDrawerBugOpen] = useState(false);
+
+  // console.log(user);
+
+  const onDrawerBugOpen = () => {
+    setIsDrawerBugOpen(true);
+  };
+
+  const onDrawerBugClose = () => {
+    setIsDrawerBugOpen(false);
+  };
 
   const menuProps = {
     bg: useColorModeValue('gray.200', 'gray.700'),
@@ -254,7 +239,7 @@ export default function TopNav() {
         zIndex="55"
         css={{
           backdropFilter: 'saturate(180%) blur(5px)',
-          backgroundColor: useColorModeValue('rgba(255, 255, 255, 0.8)', 'rgba(26, 32, 44, 0.8)')
+          backgroundColor: 'rgba(26, 32, 44, 0.8)'
         }}
       >
         <Flex
@@ -297,9 +282,7 @@ export default function TopNav() {
                     />
                   ))}
                 </div>
-              ) : (
-                null
-              )}
+              ) : null}
 
               <Menu autoSelect={false} isLazy>
                 {({ isOpen, onClose }) => (
@@ -314,9 +297,10 @@ export default function TopNav() {
                       fontSize={'1em'}
                       rounded={'md'}
                       height={'auto '}
+                      color={'white'}
                       _focus={{ boxShadow: 'none' }}
-                      _hover={{ color: linkColor, bg: menuProps.bg }}
-                      _active={{ bg: menuProps.bg }}
+                      _hover={{ color: 'white', bg: menuProps.bg }}
+                      _active={{ color: 'white', bg: menuProps.bg }}
                     >
                       Links
                       <Icon
@@ -330,7 +314,7 @@ export default function TopNav() {
                     </MenuButton>
                     <MenuList
                       zIndex={5}
-                      bg={useColorModeValue('rgb(255, 255, 255)', 'rgb(26, 32, 44)')}
+                      bg={'rgb(26, 32, 44)'}
                       border="none"
                       boxShadow={useColorModeValue(
                         '2px 4px 6px 2px rgba(160, 174, 192, 0.6)',
@@ -347,7 +331,6 @@ export default function TopNav() {
                           bg={menuProps.bg}
                           rPath={router.pathname}
                           isOpen={isGameOpen} // Pass the isOpen prop here
-
                         />
                       ))}
                     </MenuList>
@@ -358,17 +341,6 @@ export default function TopNav() {
           </HStack>
 
           <HStack as={'nav'} spacing={3} display={{ base: 'none', md: 'flex' }}>
-            <Flex alignItems={'center'}>
-              <AccentPicker
-                aria-label="Accent Color Picker"
-                variant="ghost"
-                zIndex={1}
-                color={linkColor}
-                mr={2}
-              />
-              <ColorModeSwitcher justifySelf="flex-end" />
-            </Flex>
-
             {user ? (
               <Menu autoSelect={false} isLazy>
                 {({ isOpen, onClose }) => (
@@ -384,10 +356,11 @@ export default function TopNav() {
                       rounded={'md'}
                       height={'auto '}
                       _focus={{ boxShadow: 'none' }}
-                      _hover={{ color: linkColor, bg: menuProps.bg }}
-                      _active={{ bg: menuProps.bg }}
+                      _hover={{ color: 'white', bg: menuProps.bg }}
+                      _active={{ color: 'white', bg: menuProps.bg }}
+                      color={'white'}
                     >
-                      Profile
+                      {!user.displayName ? ("Profile") : (user.displayName)}
                       <Icon
                         as={BiChevronDown}
                         h={5}
@@ -399,7 +372,7 @@ export default function TopNav() {
                     </MenuButton>
                     <MenuList
                       zIndex={5}
-                      bg={useColorModeValue('rgb(255, 255, 255)', 'rgb(26, 32, 44)')}
+                      bg={'rgb(26, 32, 44)'}
                       border="none"
                       boxShadow={useColorModeValue(
                         '2px 4px 6px 2px rgba(160, 174, 192, 0.6)',
@@ -420,12 +393,15 @@ export default function TopNav() {
                       ))}
                     </MenuList>
                     <Tooltip label="Bug Report" aria-label="Bug Report">
-  <IconButton
-    onClick={onOpen}
-    aria-label="Bug Report"
-    icon={<Icon as={CgDebug} color="red" boxSize={6} />}
-  />
-</Tooltip>
+                      <IconButton
+                        bg={'rgb(26, 32, 44)'}
+                        _hover={{ color: 'black', bg: 'rgb(26, 32, 44)' }}
+                        onClick={onDrawerBugOpen}
+                        aria-label="Bug Report"
+                        icon={<Icon as={CgDebug} color="red" boxSize={6} />}
+                      />
+                    </Tooltip>
+                    <BugReportModal isOpen={isDrawerBugOpen} onClose={onDrawerBugClose} />
                   </>
                 )}
               </Menu>
@@ -441,38 +417,6 @@ export default function TopNav() {
               ))
             )}
           </HStack>
-
-          <Modal
-            initialFocusRef={initialRef}
-            finalFocusRef={finalRef}
-            isOpen={isOpen}
-            onClose={onClose}
-          >
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader> Bug Report </ModalHeader>
-
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <FormControl>
-                  <FormLabel>Bug</FormLabel>
-                  <Input ref={initialRef} placeholder="First name" />
-                </FormControl>
-
-                <FormControl mt={4}>
-                  <FormLabel>Bug Details</FormLabel>
-                  <Textarea placeholder="Here is a sample placeholder" />
-                </FormControl>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme="blue" mr={3}>
-                  Send
-                </Button>
-                <Button onClick={onClose}>Cancel</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
         </Flex>
 
         {isOpen ? (

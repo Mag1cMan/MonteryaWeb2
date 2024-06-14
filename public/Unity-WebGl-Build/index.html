@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Monterya</title>
+    <title>Unity WebGL Player | monterya</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1920 height=1080></canvas>
+      <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -56,15 +56,15 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/monterya0.2.3.loader.js";
+      var loaderUrl = buildUrl + "/Monterya_WebBuild.loader.js";
       var config = {
-        dataUrl: buildUrl + "/monterya0.2.3.data",
-        frameworkUrl: buildUrl + "/monterya0.2.3.framework.js",
-        codeUrl: buildUrl + "/monterya0.2.3.wasm",
+        dataUrl: buildUrl + "/Monterya_WebBuild.data",
+        frameworkUrl: buildUrl + "/Monterya_WebBuild.framework.js",
+        codeUrl: buildUrl + "/Monterya_WebBuild.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "woxacorp",
         productName: "monterya",
-        productVersion: "0.2.3",
+        productVersion: "0.2.0",
         showBanner: unityShowBanner,
       };
 
@@ -93,6 +93,7 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
+
         canvas.style.width = "1280px";
         canvas.style.height = "720px";
       }
@@ -116,6 +117,8 @@
       };
       document.body.appendChild(script);
     </script>
+
+
 
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database-compat.js"></script>

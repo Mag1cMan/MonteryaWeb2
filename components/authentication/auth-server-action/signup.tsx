@@ -5,7 +5,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { db } from '../../../configs/firebase';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 // import { addDoc, collection, doc, getDoc , serverTimestamp, setDoc} from "firebase/firestore";
 
 // Fix these to handler error accordingly
@@ -30,6 +30,31 @@ export async function CheckDupes(data: { email: string; password: string; confir
     // Handle error here
     console.error('Error signing up:', error);
     return JSON.stringify({ status: error.message }); // Or handle the error message as you prefer
+  }
+}
+
+interface OAuthUser {
+  uid: string;
+  displayName?: string;
+  email?: string;
+  photoURL?: string;
+  providerId: string;
+}
+
+export async function signupWithOAuth(user: OAuthUser) {
+  try {
+    const docRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      // Document exists, user is found
+      // console.log('User data:', docSnap.data());
+    } else {
+      await setUserData(user);
+      await setUserBalance(user);
+    }
+  } catch (error) {
+    console.error('Error signing up:', error.message);
   }
 }
 
@@ -138,7 +163,8 @@ async function setUserData(user) {
       username: null,
       displayName: null,
       emailVerified: false,
-      timeCreated: serverTimestamp()
+      timeCreated: serverTimestamp(),
+      usertype: 'player'
     });
   } catch (error) {
     console.error('Error setting user data:', error);

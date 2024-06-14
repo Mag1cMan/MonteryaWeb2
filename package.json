@@ -1,7 +1,8 @@
 {
-  "name": "portfolio",
+  "name": "monterya",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,6 +16,10 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@firebase/auth": "^1.7.4",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^3.6.0",
     "@prisma/client": "^5.1.0",
     "@types/prismjs": "^1.26.0",
@@ -33,6 +38,7 @@
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
     "react-blurhash": "^0.3.0",
+    "react-datepicker": "^6.9.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
     "react-icons": "^4.10.1",
@@ -51,6 +57,7 @@
     "unified": "^10.1.2",
     "use-http": "^1.0.28",
     "use-sound": "^4.0.1",
+    "yarn": "^1.22.22",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -64,6 +71,5 @@
     "prettier": "^3.0.0",
     "prisma": "^5.1.0",
     "typescript": "^5.1.6"
-  },
-  "license": "Monterya"
+  }
 }

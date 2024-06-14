@@ -1,31 +1,35 @@
-import { extendTheme, ThemeOverride } from '@chakra-ui/react'
-import { colors } from './colors'
-import { mergeWith } from '@chakra-ui/utils'
-import { mode } from '@chakra-ui/theme-tools'
-import { useHoverLinkColor } from './colors'
-import { getColor } from '@chakra-ui/theme-tools'
+import { extendTheme, ThemeOverride } from '@chakra-ui/react';
+import { colors } from './colors';
+import { mergeWith } from '@chakra-ui/utils';
+import { getColor } from '@chakra-ui/theme-tools';
 
 // Re-exports
-export { useLinkColor, useHoverLinkColor, accentKeys } from './colors'
-export type { ColorKeys } from './colors'
+export { useLinkColor, useHoverLinkColor, accentKeys } from './colors';
+export type { ColorKeys } from './colors';
 
 export function makeTheme(overrides: ThemeOverride = {}) {
   const theme = extendTheme({
     ...extendedTheme,
     colors,
-  })
-  return mergeWith(theme, overrides)
+  });
+  return mergeWith(theme, overrides);
 }
 
+const config = {
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
+};
+
 export const extendedTheme = extendTheme({
+  config,
   fonts: {
     body: `Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
   },
   styles: {
-    global: (props) => ({
+    global: {
       body: {
-        color: mode('gray.700', 'whiteAlpha.900')(props),
-        bg: mode('gray.50', 'gray.900')(props),
+        color: 'whiteAlpha.900',
+        bg: 'gray.900',
         fontSize: '1.2em',
         '.deleted': {
           color: '#ff8383 !important',
@@ -37,30 +41,25 @@ export const extendedTheme = extendTheme({
         },
       },
       a: {
-        color: mode('blue.500', 'blue.200')(props),
+        color: 'blue.200',
         transition: 'color 0.15s',
         transitionTimingFunction: 'ease-out',
         fontWeight: '500',
         _hover: {
-          color: useHoverLinkColor(),
+          color: 'blue.300',
         },
-        // _hover: {
-        //   color: mode("blue.600", "blue.300")(props),
-        // }
       },
-    }),
+    },
   },
   components: {
     Popover: {
       parts: ['popper'],
-      baseStyle: (props) => ({
+      baseStyle: {
         popper: {
           zIndex: 10,
           maxW: 'xs',
-          // maxW: props.width ? props.width : 'xs',
-          w: props.width,
         },
-      }),
+      },
     },
     Button: {
       baseStyle: {
@@ -71,9 +70,9 @@ export const extendedTheme = extendTheme({
     Text: {
       variants: {
         gradient: (props) => {
-          const { theme, fromcolor, tocolor } = props
-          const lgFrom = getColor(theme, fromcolor)
-          const lgTo = getColor(theme, tocolor)
+          const { theme, fromcolor, tocolor } = props;
+          const lgFrom = getColor(theme, fromcolor);
+          const lgTo = getColor(theme, tocolor);
           return {
             background: `linear-gradient(135deg, ${lgFrom}, ${lgTo})`,
             backgroundClip: 'text',
@@ -82,7 +81,7 @@ export const extendedTheme = extendTheme({
               background: `linear-gradient(315deg, ${lgFrom}, ${lgTo})`,
               backgroundClip: 'text',
             },
-          }
+          };
         },
       },
     },
@@ -149,7 +148,6 @@ export const extendedTheme = extendTheme({
     },
     h3: {
       mt: '3rem',
-      // mb: "0.5rem",
       lineHeight: 1.25,
       fontWeight: 'semibold',
       fontSize: '1.25rem',
@@ -196,21 +194,21 @@ export const extendedTheme = extendTheme({
       lineHeight: 'normal',
     },
   },
-})
+});
 
 export const getTagColor = (type) => {
-  type = type.toLowerCase()
+  type = type.toLowerCase();
   if (type === 'rails' || type === 'ruby') {
-    return 'red'
+    return 'red';
   } else if (type === 'react') {
-    return 'cyan'
+    return 'cyan';
   } else if (type === 'javascript') {
-    return 'yellow'
+    return 'yellow';
   } else if (type === 'typescript' || type === 'tailwindcss') {
-    return 'blue'
+    return 'blue';
   } else if (type === 'chakraui' || type === 'css') {
-    return 'teal'
+    return 'teal';
   }
-}
+};
 
-export const theme = makeTheme()
+export const theme = makeTheme();

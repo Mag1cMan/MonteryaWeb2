@@ -155,8 +155,8 @@ const UserProfileCard = () => {
                 placeholder="Enter email address"
                 readOnly
               />
-              <FormHelperText color={currentuser?.EmailVerified ? 'green.500' : 'red.500'}>
-                Email verification status: {currentuser?.EmailVerified ? 'Verified' : 'Not verified'}
+              <FormHelperText color={currentuser?.emailVerified ? 'green.500' : 'red.500'}>
+                Email verification status: {currentuser?.emailVerified ? 'Verified' : 'Not verified'}
               </FormHelperText>
             </FormControl>
           </MotionTabPanel>

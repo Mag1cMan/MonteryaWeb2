@@ -1,9 +1,19 @@
 import { db , storage } from '../../../configs/firebase';
-import { collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
-import {v4} from "uuid";
+import { FieldValue, collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
+interface BugData {
+  userId: string;
+  bugType: string;
+  customBugType?: string;
+  bugName: string;
+  bugDetails: string;
+  timeCreated: FieldValue; // Assuming FieldValue is imported from Firestore
+  BugId: string;
+  resolve: boolean;
+  bugImage?: string; // Store URL instead of File
+}
 
 interface BugReportData {
   userId: string;
@@ -27,7 +37,7 @@ export async function SendBugReport(data: BugReportData): Promise<string> {
 
     const BugID = uuidv4();
 
-    const bugData: any = {
+    const bugData: BugData = {
       userId: data.userId,
       bugType: data.bugType,
       bugName: data.bugName,
@@ -35,7 +45,7 @@ export async function SendBugReport(data: BugReportData): Promise<string> {
       timeCreated: serverTimestamp(),
       BugId: BugID,
       resolve: false,
-      ...(data.customBugType && { customBugType: data.customBugType })
+      ...(data.customBugType && { customBugType: data.customBugType }),
     };
 
     if (data.bugImage) {

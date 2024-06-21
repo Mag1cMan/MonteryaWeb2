@@ -50,6 +50,8 @@ export const AuthContextProvider = ({ children }) => {
             } else {
                 setUser(null);
                 setLoading(false);
+                setisGameOpen(false);
+                setAuthorise(false);
             }
 
             // //console.log("Curetn user" , currentUser);

@@ -15,13 +15,15 @@ import {
   Button,
   Text,
   Flex,
-  useToast
+  useToast,
+  Box
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserAuth } from '../../configs/AuthContext';
 import { SendBugReport } from './bug-server-action/ReportHandler';
+import FileUpload from './FileUpload';
 
 const FormSchema = z.object({
   bugType: z.string().nonempty({ message: 'Bug Type is required' }),
@@ -32,6 +34,7 @@ const FormSchema = z.object({
 const BugReportModal = ({ isOpen, onClose }) => {
   const { user } = UserAuth();
   const toast = useToast();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const {
     register,
@@ -44,55 +47,58 @@ const BugReportModal = ({ isOpen, onClose }) => {
       bugType: '',
       bugName: '',
       bugDetails: '',
+      bugImage : '',
     }
   });
 
   const [selectedOption, setSelectedOption] = useState('');
   const [customBugType, setCustomBugType] = useState('');
 
-  async function onSubmit (data) {
+  async function onSubmit(data) {
     const formData = {
       userId: user.uid, // Include user ID from context
       bugType: selectedOption === 'other' ? 'Other' : data.bugType,
       ...(selectedOption === 'other' && { customBugType: customBugType }), // Include customBugType if 'Other' is selected
       bugName: data.bugName,
-      bugDetails: data.bugDetails
+      bugDetails: data.bugDetails,
+      bugImage : selectedFile,
     };
     try {
-        const result = await SendBugReport(formData);
-        const { status } = JSON.parse(result);
-        if (status !== 200) {
-            toast({
-            title: "Bug Report Failed to Send",
-            description: "Try Aagin Later",
-            position: 'bottom-right',
-            status: "warning",
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "Bug Reported Succesfully",
-            position: 'bottom-right',
-            status: "success",
-            isClosable: true,
-          });
-        }
-      } catch (error) {
+      const result = await SendBugReport(formData);
+      const { status } = JSON.parse(result);
+      if (status !== 200) {
         toast({
-          title: "An error occurred",
-          description: "Something Went Wrong",
+          title: 'Bug Report Failed to Send',
+          description: 'Try Aagin Later',
           position: 'bottom-right',
-          status: "error",
-          isClosable: true,
+          status: 'warning',
+          isClosable: true
         });
-      } finally {
-        reset({
-            bugType: '',
-            bugName: '',
-            bugDetails: ''
-          });
-          onClose();
+      } else {
+        toast({
+          title: 'Bug Reported Successfully',
+          position: 'bottom-right',
+          status: 'success',
+          isClosable: true
+        });
       }
+    } catch (error) {
+      toast({
+        title: 'An error occurred',
+        description: 'Something Went Wrong',
+        position: 'bottom-right',
+        status: 'error',
+        isClosable: true
+      });
+    } finally {
+      reset({
+        bugType: '',
+        bugName: '',
+        bugDetails: ''
+      });
+      setSelectedFile(null); // Reset selected file
+      onClose();
+    }
   }
 
   const handleSelectChange = (event) => {
@@ -110,7 +116,13 @@ const BugReportModal = ({ isOpen, onClose }) => {
       bugName: '',
       bugDetails: ''
     });
+    setSelectedFile(null); // Reset selected file
     onClose();
+  };
+
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file);
+    // Handle file upload logic here if needed
   };
 
   return (
@@ -168,6 +180,16 @@ const BugReportModal = ({ isOpen, onClose }) => {
               {errors.bugDetails && <Text color="red.500">{errors.bugDetails.message}</Text>}
             </FormControl>
           </ModalBody>
+
+          <Box p={4} textAlign="center">
+            <FileUpload
+              onFileSelect={handleFileSelect}
+              onReset={() => setSelectedFile(null)} // Pass reset function to FileUpload
+            />
+            {selectedFile && (
+              <p style={{ marginTop: '1rem' }}>Selected File: {selectedFile.name}</p>
+            )}
+          </Box>
 
           <ModalFooter>
             <Button type="submit" colorScheme="green" mr={3}>

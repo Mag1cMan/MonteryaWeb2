@@ -16,7 +16,7 @@ export function makeTheme(overrides: ThemeOverride = {}) {
 }
 
 const config = {
-  initialColorMode: 'dark',
+  initialColorMode: "dark",
   useSystemColorMode: false,
 };
 

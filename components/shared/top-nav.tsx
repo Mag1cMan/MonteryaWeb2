@@ -34,6 +34,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { CiMoneyBill } from 'react-icons/ci';
 import BugReportModal from 'components/BugReport/BugReport';
+import { ColorModeSwitcher } from 'components/theme/ColorModeSwitcher';
 
 const startGameLink = [{ name: 'Start', path: '/game' }];
 
@@ -416,7 +417,9 @@ export default function TopNav() {
                 />
               ))
             )}
+          <ColorModeSwitcher/>
           </HStack>
+
         </Flex>
 
         {isOpen ? (

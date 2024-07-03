@@ -2,13 +2,36 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged
 } from 'firebase/auth';
 import { db } from '../../../configs/firebase';
 import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
-// import { addDoc, collection, doc, getDoc , serverTimestamp, setDoc} from "firebase/firestore";
+import crypto from 'crypto';
 
-// Fix these to handler error accordingly
+// import { addDoc, collection, doc, getDoc , serverTimestamp, setDoc} from "firebase/firestore";
+// import { v6ToV1 } from 'uuid';
+
+
+function generateHashCode(playerID) {
+  const hash = crypto.createHash('sha256');
+  hash.update(playerID);
+  return BigInt('0x' + hash.digest('hex').substring(0, 16)); // Convert the first 16 characters of the hash to a BigInt
+}
+
+function getCurrentTicks() {
+  const epochTicks = BigInt('621355968000000000'); // Ticks at Unix epoch (1970-01-01T00:00:00Z)
+  const ticksPerMillisecond = BigInt('10000');
+  const currentTicks = epochTicks + (BigInt(Date.now()) * ticksPerMillisecond);
+  return currentTicks;
+}
+
+async function genUserId(playerID) {
+  const id = generateHashCode(playerID);
+  const suffix = getCurrentTicks() % BigInt('10000000000'); // Ensure suffix is within 10 digits
+  const userId = id + suffix;
+  const userIdStr = userId.toString(); // Convert to string
+  return userIdStr.substring(userIdStr.length - 10); // Ensure exactly 10 characters
+}
+
 
 export async function CheckDupes(data: { email: string; password: string; confirm: string }) {
   try {
@@ -43,15 +66,15 @@ interface OAuthUser {
 
 export async function signupWithOAuth(user: OAuthUser) {
   try {
+    const userId = await genUserId(user.displayName);
     const docRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // Document exists, user is found
-      // console.log('User data:', docSnap.data());
+      return;
     } else {
-      await setUserData(user);
-      await setUserBalance(user);
+      await setUserData(userId , user.email ,user.uid);
+      await setUserBalance(userId , user.uid);
     }
   } catch (error) {
     console.error('Error signing up:', error.message);
@@ -66,16 +89,18 @@ export async function signUpWithEmail(data: {
   const auth = getAuth();
 
   try {
-    console.log('Signup data:', data);
+    // console.log('Signup data:', data);
 
     if (data.password !== data.confirmPassword) {
       throw new Error('Passwords do not match');
     }
-
-    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    await setUserData(userCredential.user);
-    await setUserBalance(userCredential.user);
-
+    const newUserId = await genUserId(data.email);
+    console.log(typeof newUserId);
+    console.log(newUserId);
+    const credential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+    await setUserData(newUserId , data.email , credential.user.uid);
+    await setUserBalance(newUserId , credential.user.uid);
+    
     return JSON.stringify({ status: 200 });
   } catch (error) {
     console.log(error.code);
@@ -134,32 +159,18 @@ export async function signInWithEmail(data: { email: string; password: string })
   }
 }
 
-// FIX THIS  WHY CAN"T I GET CURRETN SESSION !!
-export async function readUserSession() {
-  const auth = getAuth();
-
-  // Listen for authentication state changes
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log('User is signed in', user);
-    } else {
-      console.log('No user is signed in');
-    }
-  });
-}
-
 export async function AfterGoogleSignUp() {
   console.log('Trigger After goolg login');
   // Need to add user data from Email to here
   //addUserToDatabase();
 }
 
-async function setUserData(user) {
+async function setUserData(user :string , email : string , headerID : string) {
   try {
-    const docRef = doc(db, 'users', user.uid);
+    const docRef = doc(db, 'users', headerID);
     await setDoc(docRef, {
-      email: user.email,
-      userId: user.uid,
+      email: email,
+      userId: user,
       username: null,
       displayName: null,
       emailVerified: false,
@@ -172,11 +183,11 @@ async function setUserData(user) {
   }
 }
 
-async function setUserBalance(user) {
+async function setUserBalance(newuserid : string , headerID : string) {
   try {
-    const colRefC = doc(db, 'userBalance', user.uid);
+    const colRefC = doc(db, 'userBalance', headerID);
     await setDoc(colRefC, {
-      userId: user.uid,
+      userId: newuserid,
       balance: 0,
       gold: 0,
       silver: 0,
@@ -187,3 +198,4 @@ async function setUserBalance(user) {
     throw new Error('Failed to set user balance');
   }
 }
+

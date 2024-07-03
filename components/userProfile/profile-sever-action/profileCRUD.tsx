@@ -8,7 +8,7 @@ export async function fetchUser(uid: string) {
     // console.log(docSnap.data().usertype);
     return docSnap.data();
   } catch (error) {
-    console.log("Somn error");
+    console.log("Error Fetching User Data");
   }
 }
 
@@ -20,8 +20,12 @@ export async function setDisplayName(uid, DisplayName) {
       displayName: DisplayName
     });
   
-    console.log('Display Name updated successfully');
+    // console.log('Display Name updated successfully');
+    return JSON.stringify({ status: 200});
+
   } catch (error) {
-    console.error('Error updating display name:', error);
+    // console.error('Error updating display name:', error);
+    return JSON.stringify({ status: 200, error: error.errorMessage });
+
   }
 }

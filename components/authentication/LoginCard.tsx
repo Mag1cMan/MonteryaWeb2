@@ -12,9 +12,9 @@ import {
   InputRightElement
 } from '@chakra-ui/react';
 import OAuthForm from './OAuthForm';
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signInWithEmail } from './auth-server-action/signup';
@@ -22,25 +22,25 @@ import NextLink from 'next/link';
 
 const FormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(6 , {
-    message: "Password is Too short",
+  password: z.string().min(6, {
+    message: 'Password is Too short'
   })
 });
 
-
-
 export default function LoginCard() {
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const toast = useToast();
-
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "",
-      password: "",
-    },
+      email: '',
+      password: ''
+    }
   });
 
   async function onSubmit(data) {
@@ -50,42 +50,36 @@ export default function LoginCard() {
       const { status, error } = JSON.parse(result);
       if (status !== 200) {
         toast({
-          title: "Signup Failed",
+          title: 'Signup Failed',
           description: error,
           position: 'bottom-right',
-          status: "warning",
-          isClosable: true,
+          status: 'warning',
+          isClosable: true
         });
       } else {
         toast({
-          title: "Signup Successful",
+          title: 'Signup Successful',
           position: 'bottom-right',
-          status: "success",
-          isClosable: true,
+          status: 'success',
+          isClosable: true
         });
         router.push('/');
       }
     } catch (error) {
       toast({
-        title: "An error occurred",
+        title: 'An error occurred',
         description: error.message,
         position: 'bottom-right',
-        status: "error",
-        isClosable: true,
+        status: 'error',
+        isClosable: true
       });
     } finally {
       setIsSubmitting(false);
     }
   }
 
-
   return (
-  
-<Box
-      rounded={'lg'}
-      bg={useColorModeValue('white', 'gray.700')}
-      boxShadow={'lg'}
-      p={8}>
+    <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={6}>
           <Box>
@@ -100,17 +94,10 @@ export default function LoginCard() {
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input type="password" {...register('password')} />
-              <InputRightElement h={'full'}>
-                <Button
-                  variant={'ghost'}
-                >
-                </Button>
-              </InputRightElement>
+              <InputRightElement h={'full'}></InputRightElement>
             </InputGroup>
             {errors.password && <Text color="red.500">{errors.password.message}</Text>}
           </FormControl>
-
-        
 
           <Stack spacing={4} pt={2}>
             <Button
@@ -118,10 +105,11 @@ export default function LoginCard() {
               bg={'black'}
               color={'white'}
               _hover={{
-                bg: 'blue.500',
+                bg: 'blue.500'
               }}
               type="submit"
-              isLoading={isSubmitting}>
+              isLoading={isSubmitting}
+            >
               Login
             </Button>
             <OAuthForm />
@@ -135,5 +123,6 @@ export default function LoginCard() {
           </Stack>
         </Stack>
       </form>
-    </Box>  );
+    </Box>
+  );
 }

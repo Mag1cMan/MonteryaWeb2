@@ -16,9 +16,8 @@ const TURQUOISE = '#06b6d4';
 const unityContextLocation = 'Unity-WebGl-Build/Build';
 
 export default function GameEngine() {
-  const { user, SetGameState } = UserAuth();
+  const { user, currentuser ,SetGameState } = UserAuth();
   const gameContainerRef = useRef<HTMLDivElement>(null);
-
   const {
     unityProvider,
     sendMessage,
@@ -34,7 +33,8 @@ export default function GameEngine() {
 
   useEffect(() => {
     if (isLoaded) {
-      sendMessage('FirbaseCtrl', 'SetUserId', user.uid);
+      // sendMessage('FirbaseCtrl', 'SetUserId', playerinfo);
+      sendMessage('#ClientService', 'SetUserId', currentuser.userID);
       SetGameState(true);
     }
   }, [isLoaded, sendMessage, user, SetGameState]);

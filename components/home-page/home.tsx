@@ -24,6 +24,7 @@ const gifUrl = '/assets/icons/Coin.gif';
 // const Home: React.FC<BlogPostProps> = (props) => {
 
 const Home: React.FC<BlogPostProps> = () => {
+
   const [emojiCounter, setEmojiCounter] = useState(-1);
   const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
 

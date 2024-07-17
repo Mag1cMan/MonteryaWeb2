@@ -66,13 +66,15 @@ interface OAuthUser {
 
 export async function signupWithOAuth(user: OAuthUser) {
   try {
-    const userId = await genUserId(user.displayName);
+    console.log(user.uid);
     const docRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       return;
     } else {
+      const userId = await genUserId(user.displayName);
+      console.log(user.displayName);
       await setUserData(userId , user.email ,user.uid);
       await setUserBalance(userId , user.uid);
     }

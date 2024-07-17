@@ -21,11 +21,20 @@ export const AuthContextProvider = ({ children }) => {
       globalAuthHandler = resolve;
     });
 
+
+    const RegisterUser = async (data) => {
+      try {
+        await signupWithOAuth(data.user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-
+      const data = await signInWithPopup(auth, provider);
+      RegisterUser(data);
       console.log('login');
     } catch (error) {
       console.error('Error during sign-in:', error);
@@ -41,10 +50,21 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+   
+    const SetPlayerInfo = async (currentUser) => {
+      try {
+        const setInfo = await fetchplayerInfo(currentUser.uid);
+        // console.log(setInfo);
+        setCurrentUser(setInfo);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        SetPlayerInfo();
+        SetPlayerInfo(currentUser);
         setLoading(false);
       } else {
         setUser(null);
@@ -54,22 +74,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     });
 
-    const RegisterUser = async () => {
-      try {
-        await signupWithOAuth(user);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    const SetPlayerInfo = async () => {
-      try {
-        const setInfo = await fetchplayerInfo(user.uid);
-        setCurrentUser(setInfo);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    RegisterUser();
+   
 
     return () => unsubscribe();
   }, [user]);

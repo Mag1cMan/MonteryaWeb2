@@ -1,65 +1,15 @@
 <linker>
-  <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Test_SceneManage_Check_Connection" preserve="all" />
-    <type fullname="Test_SceneManage_Unload_Connetion" preserve="all" />
-    <type fullname="Test999.TestPhysicSimulate" preserve="all" />
-  </assembly>
-  <assembly fullname="FishNet.Demos, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="FishNet.Demo.AdditiveScenes.Player" preserve="all" />
-    <type fullname="FishNet.Demo.HashGrid.MoveRandomly" preserve="all" />
-    <type fullname="FishNet.Demo.NetworkLod.MoveRandomly" preserve="all" />
-    <type fullname="FishNet.Example.ColliderRollbacks.Aim" preserve="all" />
-    <type fullname="FishNet.Example.ColliderRollbacks.Fire" preserve="all" />
-    <type fullname="FishNet.Example.ColliderRollbacks.PlayerMotor" preserve="all" />
-    <type fullname="FishNet.Example.NetworkHudCanvases" preserve="all" />
-    <type fullname="FishNet.Example.Scened.PlayerController" preserve="all" />
-  </assembly>
   <assembly fullname="FishNet.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="FishNet.Component.Observing.DistanceCondition" preserve="all" />
-    <type fullname="FishNet.Component.Observing.SceneCondition" preserve="all" />
-    <type fullname="FishNet.Component.Spawning.PlayerSpawner" preserve="all" />
-    <type fullname="FishNet.Component.Transforming.NetworkTransform" preserve="all" />
-    <type fullname="FishNet.Managing.NetworkManager" preserve="all" />
-    <type fullname="FishNet.Managing.Object.DefaultPrefabObjects" preserve="all" />
-    <type fullname="FishNet.Managing.Observing.ObserverManager" preserve="all" />
-    <type fullname="FishNet.Object.NetworkObject" preserve="all" />
-    <type fullname="FishNet.Observing.NetworkObserver" preserve="all" />
-    <type fullname="FishNet.Component.Transforming.NetworkTransform/ComponentConfigurationType" preserve="nothing" serialized="true" />
-    <type fullname="FishNet.Component.Transforming.NetworkTransform/SnappedAxes" preserve="nothing" serialized="true" />
-    <type fullname="FishNet.Object.NetworkObject/PredictionType" preserve="nothing" serialized="true" />
-    <type fullname="FishNet.Object.TransformProperties" preserve="nothing" serialized="true" />
-    <type fullname="FishNet.Serializing.TransformPackingData" preserve="nothing" serialized="true" />
+    <type fullname="FishNet.Managing.Logging.LevelLoggingConfiguration" preserve="all" />
   </assembly>
   <assembly fullname="monterya.editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="IconData" preserve="all" />
     <type fullname="SpriteDictionary" preserve="all" />
   </assembly>
   <assembly fullname="monterya.info, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="monterya.info.DataPreset" preserve="all" />
-    <type fullname="monterya.info.DialogueDataContainer" preserve="all" />
-    <type fullname="monterya.info.DialogueDataPreset" preserve="all" />
     <type fullname="monterya.info.ItemDataContainer" preserve="all" />
-    <type fullname="monterya.info.BuildingInfo" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.ChoiceData" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Craftbench" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.CropInfo" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.DialogueContent" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.DialogueData" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Equipment" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.EquipmentSlot" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Fish" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Inventory" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Item" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.LivestockInfo" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Market" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.NpcInfo" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.PlayerData" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Pond" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.Recipe" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.RequireItem" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.ResourceTerrain" preserve="nothing" serialized="true" />
-    <type fullname="monterya.info.StationInfo" preserve="nothing" serialized="true" />
-    <type fullname="visualRequireItem" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.FishingTool" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.Food" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.GatheringTool" preserve="nothing" serialized="true" />
@@ -68,54 +18,10 @@
     <type fullname="monterya.info.Outfit" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.PetData" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.RecipeData" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.RecipeListData" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.Resource" preserve="nothing" serialized="true" />
+    <type fullname="monterya.info.StationData" preserve="nothing" serialized="true" />
     <type fullname="monterya.info.TerrainData" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="monterya.server, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="monterya.server.InstanceContainer" preserve="all" />
-    <type fullname="monterya.server.Physics2DSceneHandler" preserve="all" />
-    <type fullname="MonteryaPhysicsSceneSync" preserve="all" />
-  </assembly>
-  <assembly fullname="monterya.shared, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="monterya.shared.AnimalAnimation" preserve="all" />
-    <type fullname="monterya.shared.AnimalDirection" preserve="all" />
-    <type fullname="monterya.shared.BuildingInteract" preserve="all" />
-    <type fullname="monterya.shared.CowshedBuildingObject" preserve="all" />
-    <type fullname="monterya.shared.CraftBenchObject" preserve="all" />
-    <type fullname="monterya.shared.DropItem" preserve="all" />
-    <type fullname="monterya.shared.HomeBuilding" preserve="all" />
-    <type fullname="monterya.shared.LivestockSceneObjectCtrl" preserve="all" />
-    <type fullname="monterya.shared.MarketObject" preserve="all" />
-    <type fullname="monterya.shared.NPCSystem" preserve="all" />
-    <type fullname="monterya.shared.PlayerBuilding" preserve="all" />
-    <type fullname="monterya.shared.PlayerCamera" preserve="all" />
-    <type fullname="monterya.shared.PlayerCrop" preserve="all" />
-    <type fullname="monterya.shared.PlayerCtrl" preserve="all" />
-    <type fullname="monterya.shared.PlayerFishing" preserve="all" />
-    <type fullname="monterya.shared.PlayerGathering" preserve="all" />
-    <type fullname="monterya.shared.PlayerLivestock" preserve="all" />
-    <type fullname="monterya.shared.PlayerMarket" preserve="all" />
-    <type fullname="monterya.shared.PlayerMovement" preserve="all" />
-    <type fullname="monterya.shared.PlayerStateHandler" preserve="all" />
-    <type fullname="monterya.shared.PlayerSubscribe" preserve="all" />
-    <type fullname="monterya.shared.PortalObject" preserve="all" />
-    <type fullname="monterya.shared.RiceFieldBuildingObject" preserve="all" />
-    <type fullname="monterya.shared.SharedAppearance" preserve="all" />
-    <type fullname="monterya.shared.SharedInput" preserve="all" />
-    <type fullname="monterya.shared.StorageObject" preserve="all" />
-    <type fullname="monterya.shared.TerrainObject" preserve="all" />
-    <type fullname="monterya.terrain.FishingPond" preserve="all" />
-    <type fullname="test.farm.shared.MapSelectorObjectTestFarm" preserve="all" />
-    <type fullname="monterya.shared.LootSettings" preserve="nothing" serialized="true" />
-    <type fullname="monterya.shared.MoveData" preserve="nothing" serialized="true" />
-    <type fullname="monterya.shared.SpineSet" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="spine-unity, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Spine.Unity.SkeletonAnimation" preserve="all" />
-    <type fullname="Spine.Unity.SkeletonDataAsset" preserve="all" />
-    <type fullname="Spine.Unity.SpineAtlasAsset" preserve="all" />
-    <type fullname="Spine.Unity.BlendModeMaterials" preserve="nothing" serialized="true" />
-    <type fullname="Spine.Unity.SkeletonRenderer/SpriteMaskInteractionMaterials" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -127,103 +33,14 @@
     <type fullname="UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider" preserve="all" />
     <type fullname="UnityEngine.ResourceManagement.ResourceProviders.SceneProvider" preserve="all" />
   </assembly>
-  <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="TMPro.TextMeshPro" preserve="all" />
-    <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
-    <type fullname="TMPro.TMP_FontAsset" preserve="all" />
-    <type fullname="TMPro.FaceInfo_Legacy" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.FontAssetCreationSettings" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.KerningTable" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_Character" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_GlyphAdjustmentRecord" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_GlyphPairAdjustmentRecord" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_GlyphValueRecord" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.AnimationClip" preserve="all" />
-    <type fullname="UnityEngine.Animator" preserve="all" />
-    <type fullname="UnityEngine.RuntimeAnimatorController" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.AudioListener" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.Camera" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
-    <type fullname="UnityEngine.Light" preserve="all" />
-    <type fullname="UnityEngine.LightmapSettings" preserve="all" />
-    <type fullname="UnityEngine.Material" preserve="all" />
-    <type fullname="UnityEngine.Mesh" preserve="all" />
-    <type fullname="UnityEngine.MeshFilter" preserve="all" />
-    <type fullname="UnityEngine.MeshRenderer" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
-    <type fullname="UnityEngine.RectTransform" preserve="all" />
-    <type fullname="UnityEngine.Rendering.SortingGroup" preserve="all" />
-    <type fullname="UnityEngine.RenderSettings" preserve="all" />
-    <type fullname="UnityEngine.Shader" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
-    <type fullname="UnityEngine.SpriteRenderer" preserve="all" />
-    <type fullname="UnityEngine.TextAsset" preserve="all" />
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
-    <type fullname="UnityEngine.Events.ArgumentCache" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.Events.PersistentListenerMode" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.ParticleSystem" preserve="all" />
-    <type fullname="UnityEngine.ParticleSystemRenderer" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
-    <type fullname="UnityEngine.CapsuleCollider2D" preserve="all" />
-    <type fullname="UnityEngine.CircleCollider2D" preserve="all" />
-    <type fullname="UnityEngine.Rigidbody2D" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.BoxCollider" preserve="all" />
-    <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
-    <type fullname="UnityEngine.CharacterController" preserve="all" />
-    <type fullname="UnityEngine.Rigidbody" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.Font" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.EventTrigger" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="all" />
-    <type fullname="UnityEngine.UI.Button" preserve="all" />
-    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
-    <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
-    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
-    <type fullname="UnityEngine.UI.Image" preserve="all" />
-    <type fullname="UnityEngine.UI.RawImage" preserve="all" />
-    <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.EventTrigger/Entry" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.EventSystems.EventTrigger/TriggerEvent" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.ColorBlock" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.Navigation" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.Canvas" preserve="all" />
-    <type fullname="UnityEngine.CanvasRenderer" preserve="all" />
   </assembly>
   <assembly fullname="Sirenix.Serialization">
     <type fullname="Sirenix.Serialization.SerializationData" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="UnityEngine.TextCoreFontEngineModule">
-    <type fullname="UnityEngine.TextCore.FaceInfo" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.TextCore.Glyph" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.TextCore.GlyphMetrics" preserve="nothing" serialized="true" />
-    <type fullname="UnityEngine.TextCore.GlyphRect" preserve="nothing" serialized="true" />
   </assembly>
 </linker>

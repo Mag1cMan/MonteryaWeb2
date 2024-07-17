@@ -34,7 +34,8 @@ export default function GameEngine() {
   useEffect(() => {
     if (isLoaded) {
       // sendMessage('FirbaseCtrl', 'SetUserId', playerinfo);
-      sendMessage('#ClientService', 'SetUserId', currentuser.userID);
+      console.log(currentuser.userId);
+      sendMessage('#ClientService', 'SetUserId', currentuser.userId);
       SetGameState(true);
     }
   }, [isLoaded, sendMessage, user, SetGameState]);
